@@ -45,7 +45,8 @@ public class Webcam extends JFrame {
 		contentPane.add(lblWebcam);
 	}
 
-	protected static void updateCameraParams(checking, VideoCapture capture){
+	public static void updateCameraParams(VideoCapture capture){
+		 
 		if(checking.param_check_width())
 			 capture.set(Videoio.CAP_PROP_FRAME_WIDTH, WIDTH);
 		if(checking.param_check_height())
@@ -72,7 +73,7 @@ public class Webcam extends JFrame {
 		ImageProcessor imageProcessor = new ImageProcessor();
 		Mat webCamMatImage = new Mat();
 		Image tempImage;
-		ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
+		
 		int fourcc = VideoWriter.fourcc('M', 'J', 'P', 'G');
 		int FRAMEcount = 0;
 		double captureTime =  System.currentTimeMillis();
@@ -83,8 +84,7 @@ public class Webcam extends JFrame {
 		capture.set(Videoio.CAP_PROP_FRAME_WIDTH, WIDTH);
   	capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, HEIGHT);
  		capture.set(Videoio.CAP_PROP_FOURCC, fourcc);
-		capture.set(Videoio.CAP_PROP_FRAME_WIDTH, WIDTH);
-		capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, HEIGHT);
+		
 
 		// blobDetector можно настроить один раз и не согдавать его для каждого кадра, то выносим его из цикла
 		Mat MatOut= new Mat();
@@ -100,7 +100,6 @@ public class Webcam extends JFrame {
 			while(true)
 			{
 				updateCameraParams(capture);
-
 				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
 
 				capture.read(webCamMatImage);
@@ -116,6 +115,7 @@ public class Webcam extends JFrame {
 					blobDetector.detect(webCamMatImage,keypoints1);
           org.opencv.features2d.Features2d.drawKeypoints(webCamMatImage,keypoints1,MatOut,cores,2);
 					tempImage = imageProcessor.toBufferedImage(MatOut);
+					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
 					lblWebcam.setIcon(imageIcon);
 				}else
 				{
