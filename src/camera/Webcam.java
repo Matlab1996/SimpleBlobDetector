@@ -1,7 +1,8 @@
-package cam;
+package camera;
 
-import java.awt.*;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,7 +15,8 @@ import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
 
-import javax.swing.ImageIcon;
+import camera.ImageProcessor;
+import camera.checking;
 
 @SuppressWarnings("serial")
 public class Webcam extends JFrame {
@@ -82,7 +84,7 @@ public class Webcam extends JFrame {
 
 		//Нужно или до установки FOURCC или после установить размер кадра - проверь, пожалуйста
 		capture.set(Videoio.CAP_PROP_FRAME_WIDTH, WIDTH);
-  	capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, HEIGHT);
+		capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, HEIGHT);
  		capture.set(Videoio.CAP_PROP_FOURCC, fourcc);
 		
 
