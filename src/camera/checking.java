@@ -13,7 +13,9 @@ public class checking {
 						gamma = Webcamprop.slider_gamma.getValue(),
 						gain = Webcamprop.slider_gain.getValue(),
 						width = Webcam.WIDTH,
-						height = Webcam.HEIGHT;
+						height = Webcam.HEIGHT,
+						maxArea = Webcamprop.slider_maxArea.getValue(),
+						minArea = Webcamprop.slider_minArea.getValue();
 
 	public static boolean param_check_brightness(){
 		if(brightness == Webcamprop.slider_brightness.getValue())
@@ -101,6 +103,26 @@ public class checking {
 			return false;
 		else{
 			height = Webcam.HEIGHT;
+			return true;
+		}
+	}
+	
+	//maxArea
+	public static boolean param_check_maxArea(){
+		if(maxArea == Webcamprop.slider_maxArea.getValue())
+			return false;
+		else{
+			maxArea = Webcamprop.slider_maxArea.getValue();
+			return true;
+		}
+	}
+	
+	//minArea
+	public static boolean param_check_minArea(){
+		if(minArea == Webcamprop.slider_minArea.getValue())
+			return false;
+		else{
+			minArea = Webcamprop.slider_minArea.getValue();
 			return true;
 		}
 	}

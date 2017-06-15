@@ -27,8 +27,8 @@ public class Webcamprop extends JFrame {
 	private JPanel contentPane;
 	private JButton btnCamera;
 	
-	public static JSlider slider_brightness, slider_contrast, slider_saturation, slider_sharpness, slider_hue, slider_exposure, slider_gamma, slider_gain;
-	private JTextField textField,textField_1,textField_2,textField_3,textField_4,textField_5,textField_6,textField_7;
+	public static JSlider slider_brightness, slider_contrast, slider_saturation, slider_sharpness, slider_hue, slider_exposure, slider_gamma, slider_gain, slider_minArea, slider_maxArea;
+	private JTextField textField,textField_1,textField_2,textField_3,textField_4,textField_5,textField_6,textField_7, textField_8, textField_9;
 	
 	Webcam MAIN;
 	
@@ -51,7 +51,7 @@ public class Webcamprop extends JFrame {
 
 	public Webcamprop() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(50, 50, 528, 541);
+		setBounds(50, 50, 528, 650);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -66,7 +66,7 @@ public class Webcamprop extends JFrame {
 				MAIN.setVisible(true);
 			}
 		});
-		btnCamera.setBounds(338, 470, 89, 23);
+		btnCamera.setBounds(338, 578, 89, 23);
 		contentPane.add(btnCamera);
 		
 		slider_brightness = new JSlider(-64,64,0);
@@ -189,6 +189,38 @@ public class Webcamprop extends JFrame {
 		slider_gain.setBounds(96, 402, 403, 45);
 		contentPane.add(slider_gain);
 		
+		// Добавил JSlider maxArea
+		slider_maxArea = new JSlider (0, 5000, 5000);
+		slider_maxArea.addMouseMotionListener(new MouseMotionAdapter(){
+			@Override
+			public void mouseDragged(MouseEvent e){
+				Webcam.GAIN = slider_maxArea.getValue();
+				textField_8.setText("" + slider_maxArea.getValue());
+			}
+		});
+		slider_maxArea.setPaintTicks(true);
+		slider_maxArea.setPaintLabels(true);
+		slider_maxArea.setMajorTickSpacing(500);
+		slider_maxArea.setSnapToTicks(true);
+		slider_maxArea.setBounds(96, 458, 403, 45);
+		contentPane.add(slider_maxArea);
+		
+		// Добавил JSlider minArea
+		slider_minArea = new JSlider (0, 5000, 25);
+		slider_minArea.addMouseMotionListener(new MouseMotionAdapter(){
+			@Override
+			public void mouseDragged(MouseEvent e){
+				Webcam.GAIN = slider_minArea.getValue();
+				textField_9.setText("" + slider_minArea.getValue());
+			}
+		});
+		slider_minArea.setPaintTicks(true);
+		slider_minArea.setPaintLabels(true);
+		slider_minArea.setMajorTickSpacing(500);
+		slider_minArea.setSnapToTicks(true);
+		slider_minArea.setBounds(96, 510, 403, 45);
+		contentPane.add(slider_minArea);
+		
 		JLabel lblBrightness = new JLabel("Brightness");
 		lblBrightness.setHorizontalAlignment(SwingConstants.CENTER);
 		lblBrightness.setBounds(10, 10, 76, 14);
@@ -228,6 +260,18 @@ public class Webcamprop extends JFrame {
 		lblGain.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGain.setBounds(10, 402, 76, 14);
 		contentPane.add(lblGain);
+		
+		//Добавил JLabel maxArea
+		JLabel lblmaxArea = new JLabel("maxArea");
+		lblmaxArea.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmaxArea.setBounds(10, 458, 76, 14);
+		contentPane.add(lblmaxArea);
+		
+		//Добавил JLabel minArea
+		JLabel lblminArea = new JLabel("minArea");
+		lblminArea.setHorizontalAlignment(SwingConstants.CENTER);
+		lblminArea.setBounds(10, 512, 76, 14);
+		contentPane.add(lblminArea);
 			
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -285,6 +329,22 @@ public class Webcamprop extends JFrame {
 		contentPane.add(textField_7);
 		textField_7.setColumns(10);
 		
+		//Добавил TextField maxArea
+		textField_8 = new JTextField();
+		textField_8.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_8.setFont(new Font("Dialog", Font.BOLD, 27));
+		textField_8.setBounds(10, 472, 76, 31);
+		contentPane.add(textField_8);
+		textField_8.setColumns(10);
+		
+		//Добавил TextField minArea
+		textField_9 = new JTextField();
+		textField_9.setHorizontalAlignment(SwingConstants.CENTER);
+		textField_9.setFont(new Font("Dialog", Font.BOLD, 27));
+		textField_9.setBounds(10, 528, 76, 31);
+		contentPane.add(textField_9);
+		textField_9.setColumns(10);
+		
 		String[] resolution = new String[] {"320 x 240", "640 x 480", "800 x 600", "1024 x 768", "1280 x 720", "1280 x 1024", "1920 x 1080"};
 		JComboBox<String> comboBox = new JComboBox<String>(resolution);
 		comboBox.addActionListener(new ActionListener() {
@@ -314,7 +374,7 @@ public class Webcamprop extends JFrame {
 				}
 			}
 		});
-		comboBox.setBounds(86, 470, 141, 23);
+		comboBox.setBounds(86, 578, 141, 23);
 		contentPane.add(comboBox);
 	}
 }

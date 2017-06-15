@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfKeyPoint;
+import org.opencv.core.Scalar;
 import org.opencv.features2d.FeatureDetector;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
@@ -27,7 +28,8 @@ public class Webcam extends JFrame {
 						SATURATION = 60, SHARPNESS = 2,
 						HUE = 0, EXPOSURE = -6,
 						GAMMA = 100, GAIN = 0,
-						WIDTH = 640, HEIGHT = 480;
+						WIDTH = 640, HEIGHT = 480,
+						maxArea = 5000, minArea = 25;
 
 	public Webcam() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -92,16 +94,22 @@ public class Webcam extends JFrame {
 		Mat MatOut= new Mat();
 		FeatureDetector blobDetector;
 		blobDetector = FeatureDetector.create(FeatureDetector.SIMPLEBLOB);
-		blobDetector.write("blob.html");
 		blobDetector.read("blob.html");
 		MatOfKeyPoint keypoints1 = new MatOfKeyPoint();
-		org.opencv.core.Scalar cores = new org.opencv.core.Scalar(0,0,255);
+		Scalar cores = new Scalar(0,0,255);
 
 		if(capture.isOpened())
 		{
 			while(true)
 			{
+				//maxArea
+				if (checking.param_check_maxArea())
+					capture.set(FeatureDetector.SIMPLEBLOB, maxArea);
+				//minArea
+				if (checking.param_check_minArea())
+					capture.set(FeatureDetector.SIMPLEBLOB, minArea);
 				updateCameraParams(capture);
+				
 				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
 
 				capture.read(webCamMatImage);
@@ -115,7 +123,7 @@ public class Webcam extends JFrame {
 					}
 
 					blobDetector.detect(webCamMatImage,keypoints1);
-          org.opencv.features2d.Features2d.drawKeypoints(webCamMatImage,keypoints1,MatOut,cores,2);
+					org.opencv.features2d.Features2d.drawKeypoints(webCamMatImage,keypoints1,MatOut,cores,2);
 					tempImage = imageProcessor.toBufferedImage(MatOut);
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
 					lblWebcam.setIcon(imageIcon);
