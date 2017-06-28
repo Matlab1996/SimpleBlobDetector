@@ -15,7 +15,15 @@ public class checking {
 						width = Webcam.WIDTH,
 						height = Webcam.HEIGHT,
 						maxArea = Webcamprop.slider_maxArea.getValue(),
-						minArea = Webcamprop.slider_minArea.getValue();
+						minArea = Webcamprop.slider_minArea.getValue(),
+						mLower0 = Webcamprop.slider_mLower0.getValue(),
+						mUpper0 = Webcamprop.slider_mUpper0.getValue(),
+						mLower1 = Webcamprop.slider_mLower1.getValue(),
+						mUpper1 = Webcamprop.slider_mUpper1.getValue(),
+						mLower2 = Webcamprop.slider_mLower2.getValue(),
+						mUpper2 = Webcamprop.slider_mUpper2.getValue(),
+						mLower3 = Webcamprop.slider_mLower3.getValue(),
+						mUpper3 = Webcamprop.slider_mUpper3.getValue();
 
 	public static boolean param_check_brightness(){
 		if(brightness == Webcamprop.slider_brightness.getValue())
@@ -126,4 +134,77 @@ public class checking {
 			return true;
 		}
 	}
+	
+	public static boolean param_check_mLower0(){
+		if(mLower0 == Webcamprop.slider_mLower0.getValue())
+			return false;
+		else{
+			mLower0 = Webcamprop.slider_mLower0.getValue();
+			return true;
+		}
+	}
+	
+	public static boolean param_check_mUpper0(){
+		if(mUpper0 == Webcamprop.slider_mUpper0.getValue())
+			return false;
+		else{
+			mUpper0 = Webcamprop.slider_mUpper0.getValue();
+			return true;
+		}
+	}
+	
+	public static boolean param_check_mLower1(){
+		if(mLower1 == Webcamprop.slider_mLower1.getValue())
+			return false;
+		else{
+			mLower1 = Webcamprop.slider_mLower1.getValue();
+			return true;
+		}
+	}
+	
+	public static boolean param_check_mUpper1(){
+		if(mUpper1 == Webcamprop.slider_mUpper1.getValue())
+			return false;
+		else{
+			mUpper1 = Webcamprop.slider_mUpper1.getValue();
+			return true;
+		}
+	}
+	
+	public static boolean param_check_mLower2(){
+		if(mLower2 == Webcamprop.slider_mLower2.getValue())
+			return false;
+		else{
+			mLower2 = Webcamprop.slider_mLower2.getValue();
+			return true;
+		}
+	}
+	
+	public static boolean param_check_mUpper2(){
+		if(mUpper2 == Webcamprop.slider_mUpper2.getValue())
+			return false;
+		else{
+			mUpper2 = Webcamprop.slider_mUpper2.getValue();
+			return true;
+		}
+	}
+	
+	public static boolean param_check_mLower3(){
+		if(mLower3 == Webcamprop.slider_mLower3.getValue())
+			return false;
+		else{
+			mLower3 = Webcamprop.slider_mLower3.getValue();
+			return true;
+		}
+	}
+	
+	public static boolean param_check_mUpper3(){
+		if(mUpper3 == Webcamprop.slider_mUpper3.getValue())
+			return false;
+		else{
+			mUpper3 = Webcamprop.slider_mUpper3.getValue();
+			return true;
+		}
+	}
+	
 }
