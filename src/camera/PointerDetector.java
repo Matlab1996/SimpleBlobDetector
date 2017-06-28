@@ -9,7 +9,6 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
-import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 public class PointerDetector {
@@ -56,11 +55,11 @@ public class PointerDetector {
         mLowerBound.val[0] = minH;
         mUpperBound.val[0] = maxH;
 
-        mLowerBound.val[1] = 255;
-        mUpperBound.val[1] = 255;
+        mLowerBound.val[1] = hsvColor.val[1] - mColorRadius.val[1];
+        mUpperBound.val[1] = hsvColor.val[1] + mColorRadius.val[1];
 
-        mLowerBound.val[2] = 0;
-        mUpperBound.val[2] = 255;
+        mLowerBound.val[2] = hsvColor.val[2] - mColorRadius.val[2];
+        mUpperBound.val[2] = hsvColor.val[2] + mColorRadius.val[2];
 
         mLowerBound.val[3] = 0;
         mUpperBound.val[3] = 255;
