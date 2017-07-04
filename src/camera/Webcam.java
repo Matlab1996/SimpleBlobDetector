@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.opencv.core.Mat;
+import org.opencv.core.Scalar;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
@@ -32,10 +33,11 @@ public class Webcam extends JFrame {
 						mLower1 = 0, mUpper1 = 255,
 						mLower2 = 0, mUpper2 = 255,
 						mLower3 = 0, mUpper3 = 255;
-	
-	
+	public static Scalar Lower = new Scalar(0),
+						 Upper = new Scalar(255);
+
 	public static PointerDetector pointerDetector = new PointerDetector();
-	
+
 	public Webcam() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 675, 565);
@@ -76,24 +78,31 @@ public class Webcam extends JFrame {
 			capture.set(Videoio.CAP_PROP_GAMMA, GAMMA);
 		if(checking.param_check_gain())
 			capture.set(Videoio.CAP_PROP_GAIN, GAIN);
+	}
+
+	public void Low(){
+		pointerDetector.setColorRadius(Lower);
+	}
+
+	public static void Upper(VideoCapture capture){
+		pointerDetector.setHsvColor(Upper);
 		//******************************
-		if (checking.param_check_mLower0()){
-			capture.set((int) pointerDetector.mLowerBound.val[0], mLower0);
-		}
+		if (checking.param_check_mLower0())
+			capture.set((int) Lower.val[0], mLower0);
 		if (checking.param_check_mUpper0())
-			capture.set( (int) pointerDetector.mUpperBound.val[0], mLower0);
+			capture.set((int) Upper.val[0], mUpper0);
 		if (checking.param_check_mLower1())
-			capture.set((int) pointerDetector.mLowerBound.val[1], mLower1);
+			capture.set((int) Lower.val[1], mLower1);
 		if (checking.param_check_mUpper1())
-			capture.set((int) pointerDetector.mUpperBound.val[1], mLower1);
+			capture.set((int) Upper.val[1], mUpper1);
 		if (checking.param_check_mLower2())
-			capture.set((int) pointerDetector.mLowerBound.val[2], mLower2);
+			capture.set((int) Lower.val[2], mLower2);
 		if (checking.param_check_mUpper2())
-			capture.set((int) pointerDetector.mUpperBound.val[2], mLower2);
+			capture.set((int) Upper.val[2], mUpper2);
 		if (checking.param_check_mLower3())
-			capture.set((int) pointerDetector.mLowerBound.val[3], mLower3);
+			capture.set((int) Lower.val[3], mLower3);
 		if (checking.param_check_mUpper3())
-			capture.set((int) pointerDetector.mUpperBound.val[3], mLower3);
+			capture.set((int) Upper.val[3], mUpper3);
 	}
 
 	public static void runMainLoop(){
@@ -111,8 +120,6 @@ public class Webcam extends JFrame {
 		capture.set(Videoio.CAP_PROP_FRAME_WIDTH, WIDTH);
 		capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, HEIGHT);
  		capture.set(Videoio.CAP_PROP_FOURCC, fourcc);
-		
-
 
 		if(capture.isOpened())
 		{
@@ -127,6 +134,7 @@ public class Webcam extends JFrame {
 				//if (checking.param_check_minArea())
 				//	capture.set(FeatureDetector.SIMPLEBLOB, minArea);
 				updateCameraParams(capture);
+				Upper(capture);
 				
 				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
 	
@@ -143,6 +151,7 @@ public class Webcam extends JFrame {
 					Mat frame = new Mat();
 					frame = webCamMatImage;
 					pointerDetector.process(frame);
+					pointerDetector.drawDetectedPointers(frame);
 					tempImage = imageProcessor.toBufferedImage(pointerDetector.mDilatedMask); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
 					lblWebcam.setIcon(imageIcon);

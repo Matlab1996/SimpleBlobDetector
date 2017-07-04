@@ -30,19 +30,6 @@ public class PointerDetector {
     Mat mDilatedMask = new Mat();
     Mat mHierarchy = new Mat();
 
-    public PointerDetector(){
-    	mLowerBound.val[0] = 30;
-        mUpperBound.val[0] = 205;
-
-        mLowerBound.val[1] = 80;
-        mUpperBound.val[1] = 205;
-
-        mLowerBound.val[2] = 30;
-        mUpperBound.val[2] = 205;
-
-        mLowerBound.val[3] = 30;
-        mUpperBound.val[3] = 205;
-    }
     
     public void setColorRadius(Scalar radius) {
         mColorRadius = radius;
@@ -88,15 +75,14 @@ public class PointerDetector {
     public void process(Mat rgbaImage) {
         //Размывает изображение и субдискретизирует его
     	Imgproc.pyrDown(rgbaImage, mPyrDownMat);
-        Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
+        Imgproc.pyrUp(mPyrDownMat, mPyrDownMat);
 
         Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2YCrCb);
         //Imgproc.cvtPixToPlane
         
         Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
         //Расширяет изображение при помощи определенного элемента структурирования
-        //int dilation_size = 5;
-        //Mat element1 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new  Size(2*dilation_size + 1, 2*dilation_size+1));
+        //Mat element1 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new  Size(12, 12));
         Imgproc.dilate(mMask, mDilatedMask, new Mat());
 
         List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
@@ -117,14 +103,14 @@ public class PointerDetector {
             }
         }
     }
-
+        
     public List<MatOfPoint> getContours() {
         return mContours;
     }
     
     public void drawDetectedPointers(Mat image){
     	if(!mContours.isEmpty()){
-    		Imgproc.drawContours(image, mContours, 0, new Scalar(255,0,0),5);
+    		Imgproc.drawContours(image, mContours, 1, new Scalar(255,0,0),5);
     		System.out.println("detected");
     	}
     }
