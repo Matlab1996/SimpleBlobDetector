@@ -28,11 +28,8 @@ public class Webcam extends JFrame {
 						HUE = 0, EXPOSURE = -6,
 						GAMMA = 100, GAIN = 0,
 						WIDTH = 640, HEIGHT = 480,
-						maxArea = 5000, minArea = 25,
-						mLower0 = 0, mUpper0 = 255,
-						mLower1 = 0, mUpper1 = 255,
-						mLower2 = 0, mUpper2 = 255,
-						mLower3 = 0, mUpper3 = 255;
+						maxArea = 5000, minArea = 25, max, min,
+						mLower0 = 0, mUpper0 = 255;
 	public static Scalar Lower = new Scalar(0),
 						 Upper = new Scalar(255);
 
@@ -80,29 +77,32 @@ public class Webcam extends JFrame {
 			capture.set(Videoio.CAP_PROP_GAIN, GAIN);
 	}
 
-	public void Low(){
-		pointerDetector.setColorRadius(Lower);
-	}
-
 	public static void Upper(VideoCapture capture){
+		pointerDetector.setColorRadius(Lower);
 		pointerDetector.setHsvColor(Upper);
-		//******************************
-		if (checking.param_check_mLower0())
+		if (checking.param_check_mLower()){
 			capture.set((int) Lower.val[0], mLower0);
-		if (checking.param_check_mUpper0())
+			capture.set((int) Lower.val[1], mLower0);
+			capture.set((int) Lower.val[2], mLower0);
+			capture.set((int) Lower.val[3], mLower0);
+		}
+		if (checking.param_check_mUpper()){
 			capture.set((int) Upper.val[0], mUpper0);
-		if (checking.param_check_mLower1())
-			capture.set((int) Lower.val[1], mLower1);
-		if (checking.param_check_mUpper1())
-			capture.set((int) Upper.val[1], mUpper1);
-		if (checking.param_check_mLower2())
-			capture.set((int) Lower.val[2], mLower2);
-		if (checking.param_check_mUpper2())
-			capture.set((int) Upper.val[2], mUpper2);
-		if (checking.param_check_mLower3())
-			capture.set((int) Lower.val[3], mLower3);
-		if (checking.param_check_mUpper3())
-			capture.set((int) Upper.val[3], mUpper3);
+			capture.set((int) Upper.val[1], mUpper0);
+			capture.set((int) Upper.val[2], mUpper0);
+			capture.set((int) Upper.val[3], mUpper0);
+		}
+	}
+	
+	public static void Area(VideoCapture capture){
+		pointerDetector.setMaxContourArea(max);
+		pointerDetector.setMinContourArea(min);
+		//maxArea
+		if (checking.param_check_maxArea())
+			capture.set(max, maxArea);
+		//minArea
+		if (checking.param_check_minArea())
+			capture.set(min, minArea);
 	}
 
 	public static void runMainLoop(){
@@ -125,16 +125,9 @@ public class Webcam extends JFrame {
 		{
 			while(true)
 			{
-				//maxArea
-				//if (checking.param_check_maxArea()){
-				//	pointerDetector.drawDetectedPointers(webCamMatImage);
-				//}
-				//	capture.set(FeatureDetector.SIMPLEBLOB, maxArea);
-				//minArea
-				//if (checking.param_check_minArea())
-				//	capture.set(FeatureDetector.SIMPLEBLOB, minArea);
 				updateCameraParams(capture);
 				Upper(capture);
+				Area(capture);
 				
 				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
 	

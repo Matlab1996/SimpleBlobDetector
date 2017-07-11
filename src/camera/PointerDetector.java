@@ -16,8 +16,8 @@ public class PointerDetector {
     Scalar mLowerBound = new Scalar(0);
     Scalar mUpperBound = new Scalar(255);
     // Минимальная область контура для фильтрации контуров
-    private static double mMinContourArea = 0;
-    private static double mMaxContourArea = 0;
+    double mMinContourArea = 0;
+    double mMaxContourArea = 0;
     // Цветной радиус для проверки диапазона в цветовом пространстве HSV
     private Scalar mColorRadius = new Scalar(25,50,50,0);
     private Mat mSpectrum = new Mat();

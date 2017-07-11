@@ -28,9 +28,9 @@ public class Webcamprop extends JFrame {
 	private JButton btnCamera;
 	
 	public static JSlider slider_brightness, slider_contrast, slider_saturation, slider_sharpness, slider_hue, slider_exposure, slider_gamma, slider_gain, slider_minArea, slider_maxArea,
-	slider_mLower0, slider_mLower1, slider_mLower2, slider_mLower3, slider_mUpper0, slider_mUpper1, slider_mUpper2, slider_mUpper3;
+	slider_mLower, slider_mUpper;
 	private JTextField textField,textField_1,textField_2,textField_3,textField_4,textField_5,textField_6,textField_7, textField_8, textField_9,
-	textField_10, textField_11, textField_12, textField_13, textField_14, textField_15, textField_16, textField_17;
+	textField_10, textField_11;
 	
 	Webcam MAIN;
 	
@@ -198,8 +198,8 @@ public class Webcamprop extends JFrame {
 		slider_maxArea.addMouseMotionListener(new MouseMotionAdapter(){
 			@Override
 			public void mouseDragged(MouseEvent e){
-				pointerDetector.setMaxContourArea(slider_maxArea.getValue());
-				//Webcam.maxArea = slider_maxArea.getValue();
+				//pointerDetector.setMaxContourArea(slider_maxArea.getValue());
+				Webcam.maxArea = slider_maxArea.getValue();
 				textField_8.setText("" + slider_maxArea.getValue());
 			}
 		});
@@ -218,6 +218,7 @@ public class Webcamprop extends JFrame {
 		    //	MAIN.pointerDetector.mLowerBound.val[0] = 30;
 
 			//	MAIN.pointerDetector.setMinContourArea(slider_minArea.getValue());
+				
 				Webcam.minArea = slider_minArea.getValue();
 				textField_9.setText("" + slider_minArea.getValue());
 			}
@@ -229,125 +230,41 @@ public class Webcamprop extends JFrame {
 		slider_minArea.setBounds(96, 510, 403, 45);
 		contentPane.add(slider_minArea);
 		
-		slider_mLower0 = new JSlider(0,255,0);
-		slider_mLower0.addMouseMotionListener(new MouseMotionAdapter() {
+		slider_mLower = new JSlider(0,255,0);
+		slider_mLower.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.Lower.val[0] = slider_mLower0.getValue();
-				textField_10.setText("" + slider_mLower0.getValue());
+				Webcam.Lower.val[0] = slider_mLower.getValue();
+				Webcam.Lower.val[1] = slider_mLower.getValue();
+				Webcam.Lower.val[2] = slider_mLower.getValue();
+				Webcam.Lower.val[3] = slider_mLower.getValue();
+				textField_10.setText("" + slider_mLower.getValue());
 			}
 		});
-		slider_mLower0.setPaintTicks(true);
-		slider_mLower0.setPaintLabels(true);
-		slider_mLower0.setMajorTickSpacing(51);
-		slider_mLower0.setSnapToTicks(true);
-		slider_mLower0.setBounds(634, 10, 403, 45);
-		contentPane.add(slider_mLower0);
+		slider_mLower.setPaintTicks(true);
+		slider_mLower.setPaintLabels(true);
+		slider_mLower.setMajorTickSpacing(51);
+		slider_mLower.setSnapToTicks(true);
+		slider_mLower.setBounds(634, 10, 403, 45);
+		contentPane.add(slider_mLower);
 		
-		slider_mUpper0 = new JSlider(0,255,255);
-		slider_mUpper0.addMouseMotionListener(new MouseMotionAdapter() {
+		slider_mUpper = new JSlider(0,255,255);
+		slider_mUpper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.Upper.val[0] = slider_mUpper0.getValue();
-				textField_11.setText("" + slider_mUpper0.getValue());
+				Webcam.Upper.val[0] = slider_mUpper.getValue();
+				Webcam.Upper.val[1] = slider_mUpper.getValue();
+				Webcam.Upper.val[2] = slider_mUpper.getValue();
+				Webcam.Upper.val[3] = slider_mUpper.getValue();
+				textField_11.setText("" + slider_mUpper.getValue());
 			}
 		});
-		slider_mUpper0.setPaintTicks(true);
-		slider_mUpper0.setPaintLabels(true);
-		slider_mUpper0.setMajorTickSpacing(51);
-		slider_mUpper0.setSnapToTicks(true);
-		slider_mUpper0.setBounds(634, 66, 403, 45);
-		contentPane.add(slider_mUpper0);
-		
-		slider_mLower1 = new JSlider(0,255,0);
-		slider_mLower1.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				Webcam.Lower.val[1] = slider_mLower1.getValue();
-				textField_12.setText("" + slider_mLower1.getValue());
-			}
-		});
-		slider_mLower1.setPaintTicks(true);
-		slider_mLower1.setPaintLabels(true);
-		slider_mLower1.setMajorTickSpacing(51);
-		slider_mLower1.setSnapToTicks(true);
-		slider_mLower1.setBounds(634, 122, 403, 45);
-		contentPane.add(slider_mLower1);
-		
-		slider_mUpper1 = new JSlider(0,255,255);
-		slider_mUpper1.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				Webcam.Upper.val[1] = slider_mUpper1.getValue();
-				textField_13.setText("" + slider_mUpper1.getValue());
-			}
-		});
-		slider_mUpper1.setPaintTicks(true);
-		slider_mUpper1.setPaintLabels(true);
-		slider_mUpper1.setMajorTickSpacing(51);
-		slider_mUpper1.setSnapToTicks(true);
-		slider_mUpper1.setBounds(634, 178, 403, 45);
-		contentPane.add(slider_mUpper1);
-		
-		slider_mLower2 = new JSlider(0,255,0);
-		slider_mLower2.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				Webcam.Lower.val[2] = slider_mLower2.getValue();
-				textField_14.setText("" + slider_mLower2.getValue());
-			}
-		});
-		slider_mLower2.setPaintTicks(true);
-		slider_mLower2.setPaintLabels(true);
-		slider_mLower2.setMajorTickSpacing(51);
-		slider_mLower2.setSnapToTicks(true);
-		slider_mLower2.setBounds(634, 234, 403, 45);
-		contentPane.add(slider_mLower2);
-		
-		slider_mUpper2 = new JSlider(0,255,255);
-		slider_mUpper2.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				Webcam.Upper.val[2] = slider_mUpper2.getValue();
-				textField_15.setText("" + slider_mUpper2.getValue());
-			}
-		});
-		slider_mUpper2.setPaintTicks(true);
-		slider_mUpper2.setPaintLabels(true);
-		slider_mUpper2.setMajorTickSpacing(51);
-		slider_mUpper2.setSnapToTicks(true);
-		slider_mUpper2.setBounds(634, 290, 403, 45);
-		contentPane.add(slider_mUpper2);
-		
-		slider_mLower3 = new JSlider(0,255,0);
-		slider_mLower3.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				Webcam.Lower.val[3] = slider_mLower3.getValue();
-				textField_16.setText("" + slider_mLower3.getValue());
-			}
-		});
-		slider_mLower3.setPaintTicks(true);
-		slider_mLower3.setPaintLabels(true);
-		slider_mLower3.setMajorTickSpacing(51);
-		slider_mLower3.setSnapToTicks(true);
-		slider_mLower3.setBounds(634, 346, 403, 45);
-		contentPane.add(slider_mLower3);
-		
-		slider_mUpper3 = new JSlider(0,255,255);
-		slider_mUpper3.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				Webcam.Upper.val[3] = slider_mUpper3.getValue();
-				textField_17.setText("" + slider_mUpper3.getValue());
-			}
-		});
-		slider_mUpper3.setPaintTicks(true);
-		slider_mUpper3.setPaintLabels(true);
-		slider_mUpper3.setMajorTickSpacing(51);
-		slider_mUpper3.setSnapToTicks(true);
-		slider_mUpper3.setBounds(634, 402, 403, 45);
-		contentPane.add(slider_mUpper3);
+		slider_mUpper.setPaintTicks(true);
+		slider_mUpper.setPaintLabels(true);
+		slider_mUpper.setMajorTickSpacing(51);
+		slider_mUpper.setSnapToTicks(true);
+		slider_mUpper.setBounds(634, 66, 403, 45);
+		contentPane.add(slider_mUpper);
 		
 		JLabel lblBrightness = new JLabel("Brightness");
 		lblBrightness.setHorizontalAlignment(SwingConstants.CENTER);
@@ -401,45 +318,15 @@ public class Webcamprop extends JFrame {
 		lblminArea.setBounds(10, 512, 76, 14);
 		contentPane.add(lblminArea);
 		
-		JLabel lblmLower0 = new JLabel("mLower0");
-		lblmLower0.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmLower0.setBounds(538, 10, 76, 14);
-		contentPane.add(lblmLower0);
+		JLabel lblmLower = new JLabel("mLower");
+		lblmLower.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmLower.setBounds(538, 10, 76, 14);
+		contentPane.add(lblmLower);
 		
-		JLabel lblmUpper0 = new JLabel("mUpper0");
-		lblmUpper0.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmUpper0.setBounds(538, 66, 76, 14);
-		contentPane.add(lblmUpper0);
-		
-		JLabel lblmLower1 = new JLabel("mLower1");
-		lblmLower1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmLower1.setBounds(538, 122, 76, 14);
-		contentPane.add(lblmLower1);
-		
-		JLabel lblmUpper1 = new JLabel("mUpper1");
-		lblmUpper1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmUpper1.setBounds(538, 178, 76, 14);
-		contentPane.add(lblmUpper1);
-		
-		JLabel lblmLower2 = new JLabel("mLower2");
-		lblmLower2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmLower2.setBounds(538, 234, 76, 14);
-		contentPane.add(lblmLower2);
-		
-		JLabel lblmUpper2 = new JLabel("mUpper2");
-		lblmUpper2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmUpper2.setBounds(538, 290, 76, 14);
-		contentPane.add(lblmUpper2);
-		
-		JLabel lblmLower3 = new JLabel("mLower3");
-		lblmLower3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmLower3.setBounds(538, 346, 76, 14);
-		contentPane.add(lblmLower3);
-		
-		JLabel lblmUpper3 = new JLabel("mUpper3");
-		lblmUpper3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmUpper3.setBounds(538, 402, 76, 14);
-		contentPane.add(lblmUpper3);
+		JLabel lblmUpper = new JLabel("mUpper");
+		lblmUpper.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmUpper.setBounds(538, 66, 76, 14);
+		contentPane.add(lblmUpper);
 			
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.CENTER);
@@ -513,6 +400,7 @@ public class Webcamprop extends JFrame {
 		contentPane.add(textField_9);
 		textField_9.setColumns(10);
 		
+		//Lower
 		textField_10 = new JTextField();
 		textField_10.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_10.setFont(new Font("Dialog", Font.BOLD, 27));
@@ -520,54 +408,13 @@ public class Webcamprop extends JFrame {
 		contentPane.add(textField_10);
 		textField_10.setColumns(10);
 		
+		//Upper
 		textField_11 = new JTextField();
 		textField_11.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_11.setFont(new Font("Dialog", Font.BOLD, 27));
 		textField_11.setBounds(538, 80, 76, 31);
 		contentPane.add(textField_11);
 		textField_11.setColumns(10);
-		
-		textField_12 = new JTextField();
-		textField_12.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_12.setFont(new Font("Dialog", Font.BOLD, 27));
-		textField_12.setBounds(538, 136, 76, 31);
-		contentPane.add(textField_12);
-		textField_12.setColumns(10);
-		
-		textField_13 = new JTextField();
-		textField_13.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_13.setFont(new Font("Dialog", Font.BOLD, 27));
-		textField_13.setBounds(538, 192, 76, 31);
-		contentPane.add(textField_13);
-		textField_13.setColumns(10);
-		
-		textField_14 = new JTextField();
-		textField_14.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_14.setFont(new Font("Dialog", Font.BOLD, 27));
-		textField_14.setBounds(538, 248, 76, 31);
-		contentPane.add(textField_14);
-		textField_14.setColumns(10);
-		
-		textField_15 = new JTextField();
-		textField_15.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_15.setFont(new Font("Dialog", Font.BOLD, 27));
-		textField_15.setBounds(538, 304, 76, 31);
-		contentPane.add(textField_15);
-		textField_15.setColumns(10);
-		
-		textField_16 = new JTextField();
-		textField_16.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_16.setFont(new Font("Dialog", Font.BOLD, 27));
-		textField_16.setBounds(538, 360, 76, 31);
-		contentPane.add(textField_16);
-		textField_16.setColumns(10);
-		
-		textField_17 = new JTextField();
-		textField_17.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_17.setFont(new Font("Dialog", Font.BOLD, 27));
-		textField_17.setBounds(538, 416, 76, 31);
-		contentPane.add(textField_17);
-		textField_17.setColumns(10);
 		
 		String[] resolution = new String[] {"320 x 240", "640 x 480", "800 x 600", "1024 x 768", "1280 x 720", "1280 x 1024", "1920 x 1080"};
 		JComboBox<String> comboBox = new JComboBox<String>(resolution);
