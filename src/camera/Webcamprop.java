@@ -235,9 +235,9 @@ public class Webcamprop extends JFrame {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				Webcam.Lower.val[0] = slider_mLower.getValue();
-				Webcam.Lower.val[1] = slider_mLower.getValue();
-				Webcam.Lower.val[2] = slider_mLower.getValue();
-				Webcam.Lower.val[3] = slider_mLower.getValue();
+				Webcam.Lower.val[1] = 0;
+				Webcam.Lower.val[2] = 0;
+				Webcam.Lower.val[3] = 0;
 				textField_10.setText("" + slider_mLower.getValue());
 			}
 		});
@@ -253,9 +253,9 @@ public class Webcamprop extends JFrame {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				Webcam.Upper.val[0] = slider_mUpper.getValue();
-				Webcam.Upper.val[1] = slider_mUpper.getValue();
-				Webcam.Upper.val[2] = slider_mUpper.getValue();
-				Webcam.Upper.val[3] = slider_mUpper.getValue();
+				Webcam.Upper.val[1] = 255;
+				Webcam.Upper.val[2] = 255;
+				Webcam.Upper.val[3] = 255;
 				textField_11.setText("" + slider_mUpper.getValue());
 			}
 		});
