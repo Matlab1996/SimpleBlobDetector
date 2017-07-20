@@ -82,15 +82,9 @@ public class Webcam extends JFrame {
 		pointerDetector.setHsvColor(Upper);
 		if (checking.param_check_mLower()){
 			capture.set((int) Lower.val[0], mLower0);
-			capture.set((int) Lower.val[1], mLower0);
-			capture.set((int) Lower.val[2], mLower0);
-			capture.set((int) Lower.val[3], mLower0);
 		}
 		if (checking.param_check_mUpper()){
 			capture.set((int) Upper.val[0], mUpper0);
-			capture.set((int) Upper.val[1], mUpper0);
-			capture.set((int) Upper.val[2], mUpper0);
-			capture.set((int) Upper.val[3], mUpper0);
 		}
 	}
 	

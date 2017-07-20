@@ -12,7 +12,10 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
 public class PointerDetector {
-    // Нижние и Верхние границы для проверки диапазона в цветовом пространстве HSV
+	
+    static List<Mat> channel = new ArrayList<Mat>(3);
+    
+	// Нижние и Верхние границы для проверки диапазона в цветовом пространстве HSV
     Scalar mLowerBound = new Scalar(0);
     Scalar mUpperBound = new Scalar(255);
     // Минимальная область контура для фильтрации контуров
@@ -42,11 +45,11 @@ public class PointerDetector {
         mLowerBound.val[0] = minH;
         mUpperBound.val[0] = maxH;
 
-        mLowerBound.val[1] = hsvColor.val[1] - mColorRadius.val[1];
-        mUpperBound.val[1] = hsvColor.val[1] + mColorRadius.val[1];
+        mLowerBound.val[1] = 0;
+        mUpperBound.val[1] = 255;
 
-        mLowerBound.val[2] = hsvColor.val[2] - mColorRadius.val[2];
-        mUpperBound.val[2] = hsvColor.val[2] + mColorRadius.val[2];
+        mLowerBound.val[2] = 0;
+        mUpperBound.val[2] = 255;
 
         mLowerBound.val[3] = 0;
         mUpperBound.val[3] = 255;
@@ -80,7 +83,16 @@ public class PointerDetector {
         Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2YCrCb);
         //Imgproc.cvtPixToPlane
         
-        Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
+        //Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
+        
+        Core.split(mHsvMat, channel); 
+        Mat Y = channel.get(0);
+        //Mat Cr = channel.get(1);
+        //Mat Cb = channel.get(2);
+        Imgproc.threshold(Y, Y, mLowerBound.val[0], mUpperBound.val[0], Imgproc.THRESH_BINARY);
+        
+        //Imgproc.threshold(mHsvMat, mHsvMat, mLowerBound.val[0], mUpperBound.val[0], Imgproc.THRESH_BINARY);
+        Core.bitwise_not(Y, mMask);
         //Расширяет изображение при помощи определенного элемента структурирования
         //Mat element1 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new  Size(12, 12));
         Imgproc.dilate(mMask, mDilatedMask, new Mat());
