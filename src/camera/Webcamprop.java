@@ -27,10 +27,8 @@ public class Webcamprop extends JFrame {
 	private JPanel contentPane;
 	private JButton btnCamera;
 	
-	public static JSlider slider_brightness, slider_contrast, slider_saturation, slider_sharpness, slider_hue, slider_exposure, slider_gamma, slider_gain, slider_minArea, slider_maxArea,
-	slider_mLower, slider_mUpper;
-	private JTextField textField,textField_1,textField_2,textField_3,textField_4,textField_5,textField_6,textField_7, textField_8, textField_9,
-	textField_10, textField_11;
+	public static JSlider slider_brightness, slider_contrast, slider_saturation, slider_sharpness, slider_hue, slider_exposure, slider_gamma, slider_gain, slider_minArea, slider_maxArea, slider_mUpper;
+	private JTextField textField,textField_1,textField_2,textField_3,textField_4,textField_5,textField_6,textField_7, textField_8, textField_9, textField_11;
 	
 	Webcam MAIN;
 	
@@ -230,22 +228,7 @@ public class Webcamprop extends JFrame {
 		slider_minArea.setBounds(96, 510, 403, 45);
 		contentPane.add(slider_minArea);
 		
-		slider_mLower = new JSlider(0,255,0);
-		slider_mLower.addMouseMotionListener(new MouseMotionAdapter() {
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				Webcam.Lower.val[0] = slider_mLower.getValue();
-				textField_10.setText("" + slider_mLower.getValue());
-			}
-		});
-		slider_mLower.setPaintTicks(true);
-		slider_mLower.setPaintLabels(true);
-		slider_mLower.setMajorTickSpacing(51);
-		slider_mLower.setSnapToTicks(true);
-		slider_mLower.setBounds(634, 10, 403, 45);
-		contentPane.add(slider_mLower);
-		
-		slider_mUpper = new JSlider(0,255,255);
+		slider_mUpper = new JSlider(10,220,100);
 		slider_mUpper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
@@ -255,9 +238,9 @@ public class Webcamprop extends JFrame {
 		});
 		slider_mUpper.setPaintTicks(true);
 		slider_mUpper.setPaintLabels(true);
-		slider_mUpper.setMajorTickSpacing(51);
+		slider_mUpper.setMajorTickSpacing(30);
 		slider_mUpper.setSnapToTicks(true);
-		slider_mUpper.setBounds(634, 66, 403, 45);
+		slider_mUpper.setBounds(634, 10, 403, 45);
 		contentPane.add(slider_mUpper);
 		
 		JLabel lblBrightness = new JLabel("Brightness");
@@ -312,14 +295,9 @@ public class Webcamprop extends JFrame {
 		lblminArea.setBounds(10, 512, 76, 14);
 		contentPane.add(lblminArea);
 		
-		JLabel lblmLower = new JLabel("mLower");
-		lblmLower.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmLower.setBounds(538, 10, 76, 14);
-		contentPane.add(lblmLower);
-		
 		JLabel lblmUpper = new JLabel("mUpper");
 		lblmUpper.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmUpper.setBounds(538, 66, 76, 14);
+		lblmUpper.setBounds(538, 10, 76, 14);
 		contentPane.add(lblmUpper);
 			
 		textField = new JTextField();
@@ -393,20 +371,12 @@ public class Webcamprop extends JFrame {
 		textField_9.setBounds(10, 528, 76, 31);
 		contentPane.add(textField_9);
 		textField_9.setColumns(10);
-		
-		//Lower
-		textField_10 = new JTextField();
-		textField_10.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_10.setFont(new Font("Dialog", Font.BOLD, 27));
-		textField_10.setBounds(538, 24, 76, 31);
-		contentPane.add(textField_10);
-		textField_10.setColumns(10);
-		
+	
 		//Upper
 		textField_11 = new JTextField();
 		textField_11.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_11.setFont(new Font("Dialog", Font.BOLD, 27));
-		textField_11.setBounds(538, 80, 76, 31);
+		textField_11.setBounds(538, 24, 76, 31);
 		contentPane.add(textField_11);
 		textField_11.setColumns(10);
 		

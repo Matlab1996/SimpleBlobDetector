@@ -22,7 +22,6 @@ public class PointerDetector {
     double mMinContourArea = 0;
     double mMaxContourArea = 0;
     // Цветной радиус для проверки диапазона в цветовом пространстве HSV
-    private Scalar mColorRadius = new Scalar(25,50,50,0);
     private Mat mSpectrum = new Mat();
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
 
@@ -33,14 +32,9 @@ public class PointerDetector {
     Mat mDilatedMask = new Mat();
     Mat mHierarchy = new Mat();
 
-    
-    public void setColorRadius(Scalar radius) {
-        mColorRadius = radius;
-    }
-
     public void setHsvColor(Scalar hsvColor) {
-        double minH = (hsvColor.val[0] >= mColorRadius.val[0]) ? hsvColor.val[0]-mColorRadius.val[0] : 0;
-        double maxH = (hsvColor.val[0]+mColorRadius.val[0] <= 255) ? hsvColor.val[0]+mColorRadius.val[0] : 255;
+        double minH = (hsvColor.val[0] >= 10) ? hsvColor.val[0]-10 : 0;
+        double maxH = (hsvColor.val[0]+10 <= 255) ? hsvColor.val[0]+10 : 255;
 
         mLowerBound.val[0] = minH;
         mUpperBound.val[0] = maxH;
@@ -81,7 +75,6 @@ public class PointerDetector {
         Imgproc.pyrUp(mPyrDownMat, mPyrDownMat);
 
         Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2YCrCb);
-        //Imgproc.cvtPixToPlane
         
         //Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
         
@@ -91,7 +84,6 @@ public class PointerDetector {
         //Mat Cb = channel.get(2);
         Imgproc.threshold(Y, Y, mLowerBound.val[0], mUpperBound.val[0], Imgproc.THRESH_BINARY);
         
-        //Imgproc.threshold(mHsvMat, mHsvMat, mLowerBound.val[0], mUpperBound.val[0], Imgproc.THRESH_BINARY);
         Core.bitwise_not(Y, mMask);
         //Расширяет изображение при помощи определенного элемента структурирования
         //Mat element1 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new  Size(12, 12));

@@ -29,9 +29,8 @@ public class Webcam extends JFrame {
 						GAMMA = 100, GAIN = 0,
 						WIDTH = 640, HEIGHT = 480,
 						maxArea = 5000, minArea = 25, max, min,
-						mLower0 = 0, mUpper0 = 255;
-	public static Scalar Lower = new Scalar(0),
-						 Upper = new Scalar(255);
+						mUpper0 = 255;
+	public static Scalar Upper = new Scalar(255);
 
 	public static PointerDetector pointerDetector = new PointerDetector();
 
@@ -78,11 +77,7 @@ public class Webcam extends JFrame {
 	}
 
 	public static void Upper(VideoCapture capture){
-		pointerDetector.setColorRadius(Lower);
 		pointerDetector.setHsvColor(Upper);
-		if (checking.param_check_mLower()){
-			capture.set((int) Lower.val[0], mLower0);
-		}
 		if (checking.param_check_mUpper()){
 			capture.set((int) Upper.val[0], mUpper0);
 		}

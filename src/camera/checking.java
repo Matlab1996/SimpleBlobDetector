@@ -16,7 +16,6 @@ public class checking {
 						height = Webcam.HEIGHT,
 						maxArea = Webcamprop.slider_maxArea.getValue(),
 						minArea = Webcamprop.slider_minArea.getValue(),
-						mLower0 = Webcamprop.slider_mLower.getValue(),
 						mUpper0 = Webcamprop.slider_mUpper.getValue();
 
 	public static boolean param_check_brightness(){
@@ -125,15 +124,6 @@ public class checking {
 			return false;
 		else{
 			minArea = Webcamprop.slider_minArea.getValue();
-			return true;
-		}
-	}
-	
-	public static boolean param_check_mLower(){
-		if(mLower0 == Webcamprop.slider_mLower.getValue())
-			return false;
-		else{
-			mLower0 = Webcamprop.slider_mLower.getValue();
 			return true;
 		}
 	}
