@@ -23,13 +23,14 @@ public class Webcam extends JFrame {
 	public JPanel contentPane;
 	
 	public static JLabel lblWebcam, lblFps;
-	public static int 	BRIGHTNESS = 0, CONTRAST = 32,
-						SATURATION = 60, SHARPNESS = 2,
-						HUE = 0, EXPOSURE = -6,
-						GAMMA = 100, GAIN = 0,
-						WIDTH = 640, HEIGHT = 480,
-						maxArea = 5000, minArea = 25, max, min,
-						mUpper0 = 255;
+	public static int 	WIDTH = 640, HEIGHT = 480;
+		// BRIGHTNESS = 0, CONTRAST = 32,
+		// SATURATION = 60, SHARPNESS = 2,
+		// HUE = 0, EXPOSURE = -6,
+		// GAMMA = 100, GAIN = 0,
+		// maxArea = 5000, minArea = 25, max, min,
+		// mUpper0 = 255;
+	
 	public static Scalar Upper = new Scalar(255);
 
 	public static PointerDetector pointerDetector = new PointerDetector();
@@ -48,32 +49,32 @@ public class Webcam extends JFrame {
 		contentPane.add(lblFps);
 
 		lblWebcam = new JLabel("New label");
-		lblWebcam.setBounds(0, 14, WIDTH, HEIGHT);
+		lblWebcam.setBounds(0, 14, checking.widht, checking.height);
 		contentPane.add(lblWebcam);
 	}
 
 	public static void updateCameraParams(VideoCapture capture){
 		 
 		if(checking.param_check_width())
-			 capture.set(Videoio.CAP_PROP_FRAME_WIDTH, WIDTH);
+			capture.set(Videoio.CAP_PROP_FRAME_WIDTH, checking.width);
 		if(checking.param_check_height())
-			capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, HEIGHT);
+			capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, checking.height);
 		if(checking.param_check_brightness())
-			capture.set(Videoio.CAP_PROP_BRIGHTNESS, BRIGHTNESS);
+			capture.set(Videoio.CAP_PROP_BRIGHTNESS, checking.brightness);
 		if(checking.param_check_contrast())
-			capture.set(Videoio.CAP_PROP_CONTRAST, CONTRAST);
+			capture.set(Videoio.CAP_PROP_CONTRAST, checking.contrast);
 		if(checking.param_check_saturation())
-			capture.set(Videoio.CAP_PROP_SATURATION, SATURATION);
+			capture.set(Videoio.CAP_PROP_SATURATION, checking.saturation);
 		if(checking.param_check_sharpness())
-			capture.set(Videoio.CAP_PROP_SHARPNESS, SHARPNESS);
+			capture.set(Videoio.CAP_PROP_SHARPNESS, checking.sharpness);
 		if(checking.param_check_hue())
-			capture.set(Videoio.CAP_PROP_HUE, HUE);
+			capture.set(Videoio.CAP_PROP_HUE, checking.hue);
 		if(checking.param_check_exposure())
-			capture.set(Videoio.CAP_PROP_EXPOSURE, EXPOSURE);
+			capture.set(Videoio.CAP_PROP_EXPOSURE, checking.exposure);
 		if(checking.param_check_gamma())
-			capture.set(Videoio.CAP_PROP_GAMMA, GAMMA);
+			capture.set(Videoio.CAP_PROP_GAMMA, checking.gamma);
 		if(checking.param_check_gain())
-			capture.set(Videoio.CAP_PROP_GAIN, GAIN);
+			capture.set(Videoio.CAP_PROP_GAIN, checking.gain);
 	}
 
 	public static void Upper(VideoCapture capture){
@@ -106,8 +107,8 @@ public class Webcam extends JFrame {
 		VideoCapture capture = new VideoCapture(0);
 
 		//Нужно или до установки FOURCC или после установить размер кадра - проверь, пожалуйста
-		capture.set(Videoio.CAP_PROP_FRAME_WIDTH, WIDTH);
-		capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, HEIGHT);
+		capture.set(Videoio.CAP_PROP_FRAME_WIDTH, checking.width);
+		capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, checking.height);
  		capture.set(Videoio.CAP_PROP_FOURCC, fourcc);
 
 		if(capture.isOpened())

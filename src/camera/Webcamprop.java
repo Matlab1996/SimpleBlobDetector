@@ -75,13 +75,13 @@ public class Webcamprop extends JFrame {
 		slider_brightness.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent arg0) {
-				Webcam.BRIGHTNESS = slider_brightness.getValue();
+				// Webcam.BRIGHTNESS = slider_brightness.getValue();
 				textField.setText("" + slider_brightness.getValue());
 			}
 		});
 		slider_brightness.setPaintTicks(true);
 		slider_brightness.setPaintLabels(true);
-		slider_brightness.setMajorTickSpacing(16);
+		slider_brightness.setMajorTickSpacing(1);
 		slider_brightness.setSnapToTicks(true);
 		slider_brightness.setBounds(96, 10, 403, 45);
 		contentPane.add(slider_brightness);
@@ -90,13 +90,13 @@ public class Webcamprop extends JFrame {
 		slider_contrast.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.CONTRAST = slider_contrast.getValue();
+				// Webcam.CONTRAST = slider_contrast.getValue();
 				textField_1.setText("" + slider_contrast.getValue());
 			}
 		});
 		slider_contrast.setPaintTicks(true);
 		slider_contrast.setPaintLabels(true);
-		slider_contrast.setMajorTickSpacing(8);
+		slider_contrast.setMajorTickSpacing(1);
 		slider_contrast.setSnapToTicks(true);
 		slider_contrast.setBounds(96, 66, 403, 45);
 		contentPane.add(slider_contrast);
@@ -105,13 +105,13 @@ public class Webcamprop extends JFrame {
 		slider_saturation.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.SATURATION = slider_saturation.getValue();
+				// Webcam.SATURATION = slider_saturation.getValue();
 				textField_2.setText("" + slider_saturation.getValue());
 			}
 		});
 		slider_saturation.setPaintTicks(true);
 		slider_saturation.setPaintLabels(true);
-		slider_saturation.setMajorTickSpacing(16);
+		slider_saturation.setMajorTickSpacing(1);
 		slider_saturation.setSnapToTicks(true);
 		slider_saturation.setBounds(96, 122, 403, 45);
 		contentPane.add(slider_saturation);
@@ -120,7 +120,7 @@ public class Webcamprop extends JFrame {
 		slider_sharpness.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.SHARPNESS = slider_sharpness.getValue();
+				// Webcam.SHARPNESS = slider_sharpness.getValue();
 				textField_3.setText("" + slider_sharpness.getValue());
 			}
 		});
@@ -135,13 +135,13 @@ public class Webcamprop extends JFrame {
 		slider_hue.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.HUE = slider_hue.getValue();
+				// Webcam.HUE = slider_hue.getValue();
 				textField_4.setText("" + slider_hue.getValue());
 			}
 		});
 		slider_hue.setPaintTicks(true);
 		slider_hue.setPaintLabels(true);
-		slider_hue.setMajorTickSpacing(5);
+		slider_hue.setMajorTickSpacing(1);
 		slider_hue.setSnapToTicks(true);
 		slider_hue.setBounds(96, 234, 403, 45);
 		contentPane.add(slider_hue);
@@ -150,7 +150,7 @@ public class Webcamprop extends JFrame {
 		slider_exposure.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.EXPOSURE = slider_exposure.getValue();
+				// Webcam.EXPOSURE = slider_exposure.getValue();
 				textField_5.setText("" + slider_exposure.getValue());
 			}
 		});
@@ -165,13 +165,13 @@ public class Webcamprop extends JFrame {
 		slider_gamma.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.GAMMA = slider_gamma.getValue();
+				// Webcam.GAMMA = slider_gamma.getValue();
 				textField_6.setText("" + slider_gamma.getValue());
 			}
 		});
 		slider_gamma.setPaintTicks(true);
 		slider_gamma.setPaintLabels(true);
-		slider_gamma.setMajorTickSpacing(53);
+		slider_gamma.setMajorTickSpacing(1);
 		slider_gamma.setSnapToTicks(true);
 		slider_gamma.setBounds(96, 346, 403, 45);
 		contentPane.add(slider_gamma);
@@ -180,36 +180,36 @@ public class Webcamprop extends JFrame {
 		slider_gain.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.GAIN = slider_gain.getValue();
+				// Webcam.GAIN = slider_gain.getValue();
 				textField_7.setText("" + slider_gain.getValue());
 			}
 		});
 		slider_gain.setPaintTicks(true);
 		slider_gain.setPaintLabels(true);
-		slider_gain.setMajorTickSpacing(10);
+		slider_gain.setMajorTickSpacing(1);
 		slider_gain.setSnapToTicks(true);
 		slider_gain.setBounds(96, 402, 403, 45);
 		contentPane.add(slider_gain);
 		
 		// Добавил JSlider maxArea
-		slider_maxArea = new JSlider (0, 5000, 5000);
+		slider_maxArea = new JSlider (0, 100, 100);
 		slider_maxArea.addMouseMotionListener(new MouseMotionAdapter(){
 			@Override
 			public void mouseDragged(MouseEvent e){
 				//pointerDetector.setMaxContourArea(slider_maxArea.getValue());
-				Webcam.maxArea = slider_maxArea.getValue();
+				// Webcam.maxArea = slider_maxArea.getValue();
 				textField_8.setText("" + slider_maxArea.getValue());
 			}
 		});
 		slider_maxArea.setPaintTicks(true);
 		slider_maxArea.setPaintLabels(true);
-		slider_maxArea.setMajorTickSpacing(500);
+		slider_maxArea.setMajorTickSpacing(1);
 		slider_maxArea.setSnapToTicks(true);
 		slider_maxArea.setBounds(96, 458, 403, 45);
 		contentPane.add(slider_maxArea);
 		
 		// Добавил JSlider minArea
-		slider_minArea = new JSlider (0, 5000, 25);
+		slider_minArea = new JSlider (0, 100, 25);
 		slider_minArea.addMouseMotionListener(new MouseMotionAdapter(){
 			@Override
 			public void mouseDragged(MouseEvent e){
@@ -217,13 +217,13 @@ public class Webcamprop extends JFrame {
 
 			//	MAIN.pointerDetector.setMinContourArea(slider_minArea.getValue());
 				
-				Webcam.minArea = slider_minArea.getValue();
+				// Webcam.minArea = slider_minArea.getValue();
 				textField_9.setText("" + slider_minArea.getValue());
 			}
 		});
 		slider_minArea.setPaintTicks(true);
 		slider_minArea.setPaintLabels(true);
-		slider_minArea.setMajorTickSpacing(500);
+		slider_minArea.setMajorTickSpacing(1);
 		slider_minArea.setSnapToTicks(true);
 		slider_minArea.setBounds(96, 510, 403, 45);
 		contentPane.add(slider_minArea);
@@ -232,13 +232,13 @@ public class Webcamprop extends JFrame {
 		slider_mUpper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Webcam.Upper.val[0] = slider_mUpper.getValue();
+				// Webcam.Upper.val[0] = slider_mUpper.getValue();
 				textField_11.setText("" + slider_mUpper.getValue());
 			}
 		});
 		slider_mUpper.setPaintTicks(true);
 		slider_mUpper.setPaintLabels(true);
-		slider_mUpper.setMajorTickSpacing(30);
+		slider_mUpper.setMajorTickSpacing(1);
 		slider_mUpper.setSnapToTicks(true);
 		slider_mUpper.setBounds(634, 10, 403, 45);
 		contentPane.add(slider_mUpper);
