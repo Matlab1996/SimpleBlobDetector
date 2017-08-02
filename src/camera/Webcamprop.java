@@ -81,8 +81,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_brightness.setPaintTicks(true);
 		slider_brightness.setPaintLabels(true);
-		slider_brightness.setMajorTickSpacing(1);
-		slider_brightness.setSnapToTicks(true);
+		slider_brightness.setMajorTickSpacing(5);
+		slider_brightness.setSnapToTicks(false);
 		slider_brightness.setBounds(96, 10, 403, 45);
 		contentPane.add(slider_brightness);
 		
@@ -96,8 +96,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_contrast.setPaintTicks(true);
 		slider_contrast.setPaintLabels(true);
-		slider_contrast.setMajorTickSpacing(1);
-		slider_contrast.setSnapToTicks(true);
+		slider_contrast.setMajorTickSpacing(5);
+		slider_contrast.setSnapToTicks(false);
 		slider_contrast.setBounds(96, 66, 403, 45);
 		contentPane.add(slider_contrast);
 		
@@ -111,8 +111,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_saturation.setPaintTicks(true);
 		slider_saturation.setPaintLabels(true);
-		slider_saturation.setMajorTickSpacing(1);
-		slider_saturation.setSnapToTicks(true);
+		slider_saturation.setMajorTickSpacing(5);
+		slider_saturation.setSnapToTicks(false);
 		slider_saturation.setBounds(96, 122, 403, 45);
 		contentPane.add(slider_saturation);
 		
@@ -126,8 +126,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_sharpness.setPaintTicks(true);
 		slider_sharpness.setPaintLabels(true);
-		slider_sharpness.setMajorTickSpacing(1);
-		slider_sharpness.setSnapToTicks(true);
+		slider_sharpness.setMajorTickSpacing(5);
+		slider_sharpness.setSnapToTicks(false);
 		slider_sharpness.setBounds(96, 178, 403, 45);
 		contentPane.add(slider_sharpness);
 		
@@ -141,8 +141,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_hue.setPaintTicks(true);
 		slider_hue.setPaintLabels(true);
-		slider_hue.setMajorTickSpacing(1);
-		slider_hue.setSnapToTicks(true);
+		slider_hue.setMajorTickSpacing(5);
+		slider_hue.setSnapToTicks(false);
 		slider_hue.setBounds(96, 234, 403, 45);
 		contentPane.add(slider_hue);
 		
@@ -156,8 +156,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_exposure.setPaintTicks(true);
 		slider_exposure.setPaintLabels(true);
-		slider_exposure.setMajorTickSpacing(1);
-		slider_exposure.setSnapToTicks(true);
+		slider_exposure.setMajorTickSpacing(5);
+		slider_exposure.setSnapToTicks(false);
 		slider_exposure.setBounds(96, 290, 403, 45);
 		contentPane.add(slider_exposure);
 		
@@ -171,8 +171,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_gamma.setPaintTicks(true);
 		slider_gamma.setPaintLabels(true);
-		slider_gamma.setMajorTickSpacing(1);
-		slider_gamma.setSnapToTicks(true);
+		slider_gamma.setMajorTickSpacing(5);
+		slider_gamma.setSnapToTicks(false);
 		slider_gamma.setBounds(96, 346, 403, 45);
 		contentPane.add(slider_gamma);
 		
@@ -186,8 +186,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_gain.setPaintTicks(true);
 		slider_gain.setPaintLabels(true);
-		slider_gain.setMajorTickSpacing(1);
-		slider_gain.setSnapToTicks(true);
+		slider_gain.setMajorTickSpacing(5);
+		slider_gain.setSnapToTicks(false);
 		slider_gain.setBounds(96, 402, 403, 45);
 		contentPane.add(slider_gain);
 		
@@ -203,8 +203,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_maxArea.setPaintTicks(true);
 		slider_maxArea.setPaintLabels(true);
-		slider_maxArea.setMajorTickSpacing(1);
-		slider_maxArea.setSnapToTicks(true);
+		slider_maxArea.setMajorTickSpacing(5);
+		slider_maxArea.setSnapToTicks(false);
 		slider_maxArea.setBounds(96, 458, 403, 45);
 		contentPane.add(slider_maxArea);
 		
@@ -223,8 +223,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_minArea.setPaintTicks(true);
 		slider_minArea.setPaintLabels(true);
-		slider_minArea.setMajorTickSpacing(1);
-		slider_minArea.setSnapToTicks(true);
+		slider_minArea.setMajorTickSpacing(5);
+		slider_minArea.setSnapToTicks(false);
 		slider_minArea.setBounds(96, 510, 403, 45);
 		contentPane.add(slider_minArea);
 		
@@ -238,8 +238,8 @@ public class Webcamprop extends JFrame {
 		});
 		slider_mUpper.setPaintTicks(true);
 		slider_mUpper.setPaintLabels(true);
-		slider_mUpper.setMajorTickSpacing(1);
-		slider_mUpper.setSnapToTicks(true);
+		slider_mUpper.setMajorTickSpacing(5);
+		slider_mUpper.setSnapToTicks(false);
 		slider_mUpper.setBounds(634, 10, 403, 45);
 		contentPane.add(slider_mUpper);
 		
