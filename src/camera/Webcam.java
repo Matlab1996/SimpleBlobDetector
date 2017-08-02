@@ -49,7 +49,7 @@ public class Webcam extends JFrame {
 		contentPane.add(lblFps);
 
 		lblWebcam = new JLabel("New label");
-		lblWebcam.setBounds(0, 14, checking.widht, checking.height);
+		lblWebcam.setBounds(0, 14, WIDTH, HEIGHT);
 		contentPane.add(lblWebcam);
 	}
 
@@ -80,19 +80,19 @@ public class Webcam extends JFrame {
 	public static void Upper(VideoCapture capture){
 		pointerDetector.setHsvColor(Upper);
 		if (checking.param_check_mUpper()){
-			capture.set((int) Upper.val[0], mUpper0);
+			capture.set((int) Upper.val[0], checking.mUpper0);
 		}
 	}
 	
 	public static void Area(VideoCapture capture){
-		pointerDetector.setMaxContourArea(max);
-		pointerDetector.setMinContourArea(min);
+		//pointerDetector.setMaxContourArea(max);
+		//pointerDetector.setMinContourArea(min);
 		//maxArea
-		if (checking.param_check_maxArea())
-			capture.set(max, maxArea);
+		//if (checking.param_check_maxArea())
+		//	capture.set(max, maxArea);
 		//minArea
-		if (checking.param_check_minArea())
-			capture.set(min, minArea);
+		//if (checking.param_check_minArea())
+		//	capture.set(min, minArea);
 	}
 
 	public static void runMainLoop(){

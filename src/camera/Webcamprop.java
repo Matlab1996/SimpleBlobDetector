@@ -232,7 +232,7 @@ public class Webcamprop extends JFrame {
 		slider_mUpper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// Webcam.Upper.val[0] = slider_mUpper.getValue();
+				Webcam.Upper.val[0] = slider_mUpper.getValue();
 				textField_11.setText("" + slider_mUpper.getValue());
 			}
 		});
