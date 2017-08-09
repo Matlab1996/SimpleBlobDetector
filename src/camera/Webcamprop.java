@@ -81,7 +81,7 @@ public class Webcamprop extends JFrame {
 		});
 		slider_brightness.setPaintTicks(true);
 		slider_brightness.setPaintLabels(true);
-		slider_brightness.setMajorTickSpacing(5);
+		slider_brightness.setMajorTickSpacing(8);
 		slider_brightness.setSnapToTicks(false);
 		slider_brightness.setBounds(96, 10, 403, 45);
 		contentPane.add(slider_brightness);
@@ -111,7 +111,7 @@ public class Webcamprop extends JFrame {
 		});
 		slider_saturation.setPaintTicks(true);
 		slider_saturation.setPaintLabels(true);
-		slider_saturation.setMajorTickSpacing(5);
+		slider_saturation.setMajorTickSpacing(16);
 		slider_saturation.setSnapToTicks(false);
 		slider_saturation.setBounds(96, 122, 403, 45);
 		contentPane.add(slider_saturation);
@@ -126,7 +126,7 @@ public class Webcamprop extends JFrame {
 		});
 		slider_sharpness.setPaintTicks(true);
 		slider_sharpness.setPaintLabels(true);
-		slider_sharpness.setMajorTickSpacing(5);
+		slider_sharpness.setMajorTickSpacing(1);
 		slider_sharpness.setSnapToTicks(false);
 		slider_sharpness.setBounds(96, 178, 403, 45);
 		contentPane.add(slider_sharpness);
@@ -156,7 +156,7 @@ public class Webcamprop extends JFrame {
 		});
 		slider_exposure.setPaintTicks(true);
 		slider_exposure.setPaintLabels(true);
-		slider_exposure.setMajorTickSpacing(5);
+		slider_exposure.setMajorTickSpacing(1);
 		slider_exposure.setSnapToTicks(false);
 		slider_exposure.setBounds(96, 290, 403, 45);
 		contentPane.add(slider_exposure);
@@ -171,7 +171,7 @@ public class Webcamprop extends JFrame {
 		});
 		slider_gamma.setPaintTicks(true);
 		slider_gamma.setPaintLabels(true);
-		slider_gamma.setMajorTickSpacing(5);
+		slider_gamma.setMajorTickSpacing(30);
 		slider_gamma.setSnapToTicks(false);
 		slider_gamma.setBounds(96, 346, 403, 45);
 		contentPane.add(slider_gamma);
@@ -196,8 +196,6 @@ public class Webcamprop extends JFrame {
 		slider_maxArea.addMouseMotionListener(new MouseMotionAdapter(){
 			@Override
 			public void mouseDragged(MouseEvent e){
-				//pointerDetector.setMaxContourArea(slider_maxArea.getValue());
-				// Webcam.maxArea = slider_maxArea.getValue();
 				textField_8.setText("" + slider_maxArea.getValue());
 			}
 		});
@@ -238,7 +236,7 @@ public class Webcamprop extends JFrame {
 		});
 		slider_mUpper.setPaintTicks(true);
 		slider_mUpper.setPaintLabels(true);
-		slider_mUpper.setMajorTickSpacing(5);
+		slider_mUpper.setMajorTickSpacing(30);
 		slider_mUpper.setSnapToTicks(false);
 		slider_mUpper.setBounds(634, 10, 403, 45);
 		contentPane.add(slider_mUpper);

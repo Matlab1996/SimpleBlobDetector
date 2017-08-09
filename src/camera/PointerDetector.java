@@ -29,7 +29,6 @@ public class PointerDetector {
     Mat mPyrDownMat = new Mat();
     Mat mHsvMat = new Mat();
     Mat mMask = new Mat();
-    Mat mDilatedMask = new Mat();
     Mat mHierarchy = new Mat();
 
     public void setHsvColor(Scalar hsvColor) {
@@ -69,7 +68,7 @@ public class PointerDetector {
         mMaxContourArea = area;
     }
 
-    public void process(Mat rgbaImage) {
+    public void process(Mat rgbaImage, Mat mDilatedMask) {
         //Размывает изображение и субдискретизирует его
     	Imgproc.pyrDown(rgbaImage, mPyrDownMat);
         Imgproc.pyrUp(mPyrDownMat, mPyrDownMat);
@@ -96,13 +95,12 @@ public class PointerDetector {
         Iterator<MatOfPoint> each = contours.iterator();
         
         // Filter contours by area and resize to fit the original image size
-        mContours.clear();
-        each = contours.iterator();
+        
         while (each.hasNext()) {
             MatOfPoint contour = each.next();
             double area = Imgproc.contourArea(contour);
             if (area >= mMinContourArea && area <= mMaxContourArea ) {
-                Core.multiply(contour, new Scalar(4,4), contour);
+                Core.multiply(contour, new Scalar(255, 0, 0), contour);
                 mContours.add(contour);
             }
         }

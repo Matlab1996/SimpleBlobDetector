@@ -9,7 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfKeyPoint;
 import org.opencv.core.Scalar;
+import org.opencv.features2d.FeatureDetector;
+import org.opencv.features2d.Features2d;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
@@ -23,12 +26,13 @@ public class Webcam extends JFrame {
 	public JPanel contentPane;
 	
 	public static JLabel lblWebcam, lblFps;
-	public static int 	WIDTH = 640, HEIGHT = 480;
+	public static int 	WIDTH = 640, HEIGHT = 480,
 		// BRIGHTNESS = 0, CONTRAST = 32,
 		// SATURATION = 60, SHARPNESS = 2,
 		// HUE = 0, EXPOSURE = -6,
 		// GAMMA = 100, GAIN = 0,
-		// maxArea = 5000, minArea = 25, max, min,
+		// maxArea = 5000, minArea = 25,
+		   max, min;
 		// mUpper0 = 255;
 	
 	public static Scalar Upper = new Scalar(255);
@@ -85,14 +89,14 @@ public class Webcam extends JFrame {
 	}
 	
 	public static void Area(VideoCapture capture){
-		//pointerDetector.setMaxContourArea(max);
-		//pointerDetector.setMinContourArea(min);
+		pointerDetector.setMaxContourArea(max);
+		pointerDetector.setMinContourArea(min);
 		//maxArea
-		//if (checking.param_check_maxArea())
-		//	capture.set(max, maxArea);
+		if (checking.param_check_maxArea())
+			capture.set(max, checking.maxArea);
 		//minArea
-		//if (checking.param_check_minArea())
-		//	capture.set(min, minArea);
+		if (checking.param_check_minArea())
+			capture.set(min, checking.minArea);
 	}
 
 	public static void runMainLoop(){
@@ -103,6 +107,7 @@ public class Webcam extends JFrame {
 		int fourcc = VideoWriter.fourcc('M', 'J', 'P', 'G');
 		int FRAMEcount = 0;
 		double captureTime =  System.currentTimeMillis();
+		Observable.exampleLate();
 
 		VideoCapture capture = new VideoCapture(0);
 
@@ -132,10 +137,23 @@ public class Webcam extends JFrame {
 					}
 
 					Mat frame = new Mat();
+					Mat kadr = new Mat();
 					frame = webCamMatImage;
-					pointerDetector.process(frame);
-					pointerDetector.drawDetectedPointers(frame);
-					tempImage = imageProcessor.toBufferedImage(pointerDetector.mDilatedMask); 
+					pointerDetector.process(frame, kadr);
+					pointerDetector.drawDetectedPointers(kadr);
+					pointerDetector.getContours();
+					// SimpleBLob Detector
+			 		Mat MatOut= new Mat();
+					FeatureDetector blobDetector;
+					blobDetector = FeatureDetector.create(FeatureDetector.SIMPLEBLOB);
+					blobDetector.write("blob.html");
+					blobDetector.read("blob.html");
+					MatOfKeyPoint keypoints1 = new MatOfKeyPoint();
+					Scalar cores = new Scalar(0,0,255);
+			 		blobDetector.detect(kadr,keypoints1);
+			 		Features2d.drawKeypoints(kadr,keypoints1,MatOut,cores, 100);
+					
+					tempImage = imageProcessor.toBufferedImage(MatOut); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
 					lblWebcam.setIcon(imageIcon);
 				}else
