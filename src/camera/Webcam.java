@@ -19,9 +19,13 @@ import org.opencv.videoio.Videoio;
 
 import camera.ImageProcessor;
 import camera.checking;
+import camera.reac.PrintSubscriber;
+import rx.Observable;
 
 @SuppressWarnings("serial")
 public class Webcam extends JFrame {
+
+	protected static final String TAG = null;
 
 	public JPanel contentPane;
 	
@@ -63,8 +67,14 @@ public class Webcam extends JFrame {
 			capture.set(Videoio.CAP_PROP_FRAME_WIDTH, checking.width);
 		if(checking.param_check_height())
 			capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, checking.height);
-		if(checking.param_check_brightness())
-			capture.set(Videoio.CAP_PROP_BRIGHTNESS, checking.brightness);
+		if(checking.param_check_brightness()){
+			//capture.set(Videoio.CAP_PROP_BRIGHTNESS, checking.brightness);
+			Observable<Integer> bri = Observable.just(Videoio.CAP_PROP_BRIGHTNESS);
+			PrintSubscriber a = new PrintSubscriber(Webcamprop.slider_brightness.getValue());
+			bri
+				.map(s -> s=Webcamprop.slider_brightness.getValue())
+				.subscribe(a);
+		}
 		if(checking.param_check_contrast())
 			capture.set(Videoio.CAP_PROP_CONTRAST, checking.contrast);
 		if(checking.param_check_saturation())
@@ -88,15 +98,16 @@ public class Webcam extends JFrame {
 		}
 	}
 	
-	public static void Area(VideoCapture capture){
-		pointerDetector.setMaxContourArea(max);
-		pointerDetector.setMinContourArea(min);
+	public static void Area(int b){
+		VideoCapture capture = new VideoCapture();
+		//pointerDetector.setMaxContourArea(max);
+		//pointerDetector.setMinContourArea(min);
 		//maxArea
 		if (checking.param_check_maxArea())
-			capture.set(max, checking.maxArea);
+			capture.set(b, checking.maxArea);
 		//minArea
-		if (checking.param_check_minArea())
-			capture.set(min, checking.minArea);
+		//if (checking.param_check_minArea())
+		//	capture.set(min, checking.minArea);
 	}
 
 	public static void runMainLoop(){
@@ -107,7 +118,7 @@ public class Webcam extends JFrame {
 		int fourcc = VideoWriter.fourcc('M', 'J', 'P', 'G');
 		int FRAMEcount = 0;
 		double captureTime =  System.currentTimeMillis();
-		Observable.exampleLate();
+		reac.exampleLate();
 
 		VideoCapture capture = new VideoCapture(0);
 
@@ -122,7 +133,6 @@ public class Webcam extends JFrame {
 			{
 				updateCameraParams(capture);
 				Upper(capture);
-				Area(capture);
 				
 				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
 	
@@ -137,23 +147,12 @@ public class Webcam extends JFrame {
 					}
 
 					Mat frame = new Mat();
-					Mat kadr = new Mat();
 					frame = webCamMatImage;
-					pointerDetector.process(frame, kadr);
-					pointerDetector.drawDetectedPointers(kadr);
+					pointerDetector.process(frame, frame);
+					pointerDetector.drawDetectedPointers(frame);
 					pointerDetector.getContours();
-					// SimpleBLob Detector
-			 		Mat MatOut= new Mat();
-					FeatureDetector blobDetector;
-					blobDetector = FeatureDetector.create(FeatureDetector.SIMPLEBLOB);
-					blobDetector.write("blob.html");
-					blobDetector.read("blob.html");
-					MatOfKeyPoint keypoints1 = new MatOfKeyPoint();
-					Scalar cores = new Scalar(0,0,255);
-			 		blobDetector.detect(kadr,keypoints1);
-			 		Features2d.drawKeypoints(kadr,keypoints1,MatOut,cores, 100);
 					
-					tempImage = imageProcessor.toBufferedImage(MatOut); 
+			 		tempImage = imageProcessor.toBufferedImage(frame); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
 					lblWebcam.setIcon(imageIcon);
 				}else

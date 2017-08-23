@@ -38,15 +38,6 @@ public class PointerDetector {
         mLowerBound.val[0] = minH;
         mUpperBound.val[0] = maxH;
 
-        mLowerBound.val[1] = 0;
-        mUpperBound.val[1] = 255;
-
-        mLowerBound.val[2] = 0;
-        mUpperBound.val[2] = 255;
-
-        mLowerBound.val[3] = 0;
-        mUpperBound.val[3] = 255;
-
         Mat spectrumHsv = new Mat(1, (int)(maxH-minH), CvType.CV_8UC3);
 
         for (int j = 0; j < maxH-minH; j++) {
