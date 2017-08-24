@@ -75,7 +75,7 @@ public class Webcamprop extends JFrame {
 		slider_brightness.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent arg0) {
-				// Webcam.BRIGHTNESS = slider_brightness.getValue();
+				settings.brightness.onNext(slider_brightness.getValue());
 				textField.setText("" + slider_brightness.getValue());
 			}
 		});
@@ -90,7 +90,7 @@ public class Webcamprop extends JFrame {
 		slider_contrast.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// Webcam.CONTRAST = slider_contrast.getValue();
+				settings.contrast.onNext(slider_contrast.getValue());
 				textField_1.setText("" + slider_contrast.getValue());
 			}
 		});
@@ -105,7 +105,7 @@ public class Webcamprop extends JFrame {
 		slider_saturation.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// Webcam.SATURATION = slider_saturation.getValue();
+				settings.saturation.onNext(slider_saturation.getValue());
 				textField_2.setText("" + slider_saturation.getValue());
 			}
 		});
@@ -120,7 +120,7 @@ public class Webcamprop extends JFrame {
 		slider_sharpness.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// Webcam.SHARPNESS = slider_sharpness.getValue();
+				settings.sharpness.onNext(slider_sharpness.getValue());
 				textField_3.setText("" + slider_sharpness.getValue());
 			}
 		});
@@ -135,7 +135,7 @@ public class Webcamprop extends JFrame {
 		slider_hue.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// Webcam.HUE = slider_hue.getValue();
+				settings.hue.onNext(slider_hue.getValue());
 				textField_4.setText("" + slider_hue.getValue());
 			}
 		});
@@ -150,7 +150,7 @@ public class Webcamprop extends JFrame {
 		slider_exposure.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// Webcam.EXPOSURE = slider_exposure.getValue();
+				settings.exposure.onNext(slider_exposure.getValue());
 				textField_5.setText("" + slider_exposure.getValue());
 			}
 		});
@@ -165,7 +165,7 @@ public class Webcamprop extends JFrame {
 		slider_gamma.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// Webcam.GAMMA = slider_gamma.getValue();
+				settings.gamma.onNext(slider_gamma.getValue());
 				textField_6.setText("" + slider_gamma.getValue());
 			}
 		});
@@ -180,7 +180,7 @@ public class Webcamprop extends JFrame {
 		slider_gain.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// Webcam.GAIN = slider_gain.getValue();
+				settings.gain.onNext(slider_gain.getValue());
 				textField_7.setText("" + slider_gain.getValue());
 			}
 		});
@@ -211,8 +211,6 @@ public class Webcamprop extends JFrame {
 		slider_minArea.addMouseMotionListener(new MouseMotionAdapter(){
 			@Override
 			public void mouseDragged(MouseEvent e){
-		    //	MAIN.pointerDetector.mLowerBound.val[0] = 30;
-
 			//	MAIN.pointerDetector.setMinContourArea(slider_minArea.getValue());
 				
 				// Webcam.minArea = slider_minArea.getValue();
@@ -230,6 +228,8 @@ public class Webcamprop extends JFrame {
 		slider_mUpper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
+				
+				settings.upper.onNext(slider_mUpper.getValue());
 				Webcam.Upper.val[0] = slider_mUpper.getValue();
 				textField_11.setText("" + slider_mUpper.getValue());
 			}
@@ -384,25 +384,25 @@ public class Webcamprop extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				switch((String)comboBox.getSelectedItem()){
 					case("320 x 240"):
-						{Webcam.WIDTH = 320; Webcam.HEIGHT = 240; Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
+						{settings.width.onNext(320); settings.height.onNext(240); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
 						break;}
 					case("640 x 480"):
-						{Webcam.WIDTH = 640; Webcam.HEIGHT = 480; Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
+						{settings.width.onNext(640); settings.height.onNext(480); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
 						break;}
 					case("800 x 600"):
-						{Webcam.WIDTH = 800; Webcam.HEIGHT = 600; Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
+						{settings.width.onNext(800); settings.height.onNext(600); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
 						break;}
 					case("1024 x 768"):
-						{Webcam.WIDTH = 1024; Webcam.HEIGHT = 768; Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
+						{settings.width.onNext(1024); settings.height.onNext(768); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
 						break;}
 					case("1280 x 720"):
-						{Webcam.WIDTH = 1280; Webcam.HEIGHT = 720; Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
+						{settings.width.onNext(1280); settings.height.onNext(720); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
 						break;}
 					case("1280 x 1024"):
-						{Webcam.WIDTH = 1280; Webcam.HEIGHT = 1024; Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
+						{settings.width.onNext(1280); settings.height.onNext(1024); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
 						break;}
 					case("1920 x 1080"):
-						{Webcam.WIDTH = 1920; Webcam.HEIGHT = 1080; Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
+						{settings.width.onNext(1920); settings.height.onNext(1080); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
 						break;}
 				}
 			}
