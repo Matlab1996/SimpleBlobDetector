@@ -58,34 +58,42 @@ public class Webcam extends JFrame {
 		contentPane.add(lblWebcam);
 	}
 
+	private void subscribeForSettings(VideoCapture capture){
+		Setting.exposure.subsribe((exposureValue)=>{
+			capture.set(Videoio.CAP_PROP_EXPOSURE, exposureValue);
+		});
+		Setting.brightness.subsribe((brightnessValue)=>{
+			capture.set(Videoio.CAP_PROP_BRIGHTNESS, brightnessValue);
+		});
+	}
+
 	public static void updateCameraParams(VideoCapture capture){
-		 
-		if(checking.param_check_width())
-			capture.set(Videoio.CAP_PROP_FRAME_WIDTH, checking.width);
-		if(checking.param_check_height())
-			capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, checking.height);
-		if(checking.param_check_brightness()){
-			//capture.set(Videoio.CAP_PROP_BRIGHTNESS, checking.brightness);
-			Observable<Integer> bri = Observable.just(Videoio.CAP_PROP_BRIGHTNESS);
-			PrintSubscriber a = new PrintSubscriber(Webcamprop.slider_brightness.getValue());
-			bri
-				.map(s -> s=Webcamprop.slider_brightness.getValue())
-				.subscribe(a);
-		}
-		if(checking.param_check_contrast())
-			capture.set(Videoio.CAP_PROP_CONTRAST, checking.contrast);
-		if(checking.param_check_saturation())
-			capture.set(Videoio.CAP_PROP_SATURATION, checking.saturation);
-		if(checking.param_check_sharpness())
-			capture.set(Videoio.CAP_PROP_SHARPNESS, checking.sharpness);
-		if(checking.param_check_hue())
-			capture.set(Videoio.CAP_PROP_HUE, checking.hue);
-		if(checking.param_check_exposure())
-			capture.set(Videoio.CAP_PROP_EXPOSURE, checking.exposure);
-		if(checking.param_check_gamma())
-			capture.set(Videoio.CAP_PROP_GAMMA, checking.gamma);
-		if(checking.param_check_gain())
-			capture.set(Videoio.CAP_PROP_GAIN, checking.gain);
+		// if(checking.param_check_width())
+		// 	capture.set(Videoio.CAP_PROP_FRAME_WIDTH, checking.width);
+		// if(checking.param_check_height())
+		// 	capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, checking.height);
+		// if(checking.param_check_brightness()){
+		// 	//capture.set(Videoio.CAP_PROP_BRIGHTNESS, checking.brightness);
+		// 	Observable<Integer> bri = Observable.just(Videoio.CAP_PROP_BRIGHTNESS);
+		// 	PrintSubscriber a = new PrintSubscriber(Webcamprop.slider_brightness.getValue());
+		// 	bri
+		// 		.map(s -> s=Webcamprop.slider_brightness.getValue())
+		// 		.subscribe(a);
+		// }
+		// if(checking.param_check_contrast())
+		// 	capture.set(Videoio.CAP_PROP_CONTRAST, checking.contrast);
+		// if(checking.param_check_saturation())
+		// 	capture.set(Videoio.CAP_PROP_SATURATION, checking.saturation);
+		// if(checking.param_check_sharpness())
+		// 	capture.set(Videoio.CAP_PROP_SHARPNESS, checking.sharpness);
+		// if(checking.param_check_hue())
+		// 	capture.set(Videoio.CAP_PROP_HUE, checking.hue);
+		// if(checking.param_check_exposure())
+		// 	capture.set(Videoio.CAP_PROP_EXPOSURE, checking.exposure);
+		// if(checking.param_check_gamma())
+		// 	capture.set(Videoio.CAP_PROP_GAMMA, checking.gamma);
+		// if(checking.param_check_gain())
+		// 	capture.set(Videoio.CAP_PROP_GAIN, checking.gain);
 	}
 
 	public static void Upper(VideoCapture capture){
@@ -118,6 +126,7 @@ public class Webcam extends JFrame {
 		reac.exampleLate();
 
 		VideoCapture capture = new VideoCapture(0);
+		subscribeForSettings(capture);
 
 		//Нужно или до установки FOURCC или после установить размер кадра - проверь, пожалуйста
 		capture.set(Videoio.CAP_PROP_FRAME_WIDTH, checking.width);
@@ -128,7 +137,6 @@ public class Webcam extends JFrame {
 		{
 			while(true)
 			{
-				updateCameraParams(capture);
 				Upper(capture);
 				
 				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
