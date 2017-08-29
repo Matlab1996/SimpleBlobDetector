@@ -196,6 +196,7 @@ public class Webcamprop extends JFrame {
 		slider_maxArea.addMouseMotionListener(new MouseMotionAdapter(){
 			@Override
 			public void mouseDragged(MouseEvent e){
+				settings.maxArea.onNext(slider_maxArea.getValue());
 				textField_8.setText("" + slider_maxArea.getValue());
 			}
 		});

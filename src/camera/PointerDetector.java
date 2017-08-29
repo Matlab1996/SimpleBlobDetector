@@ -20,7 +20,7 @@ public class PointerDetector {
     Scalar mUpperBound = new Scalar(255);
     // Минимальная область контура для фильтрации контуров
     double mMinContourArea = 0;
-    double mMaxContourArea = 0;
+    double mMaxContourArea = 100;
     // Цветной радиус для проверки диапазона в цветовом пространстве HSV
     private Mat mSpectrum = new Mat();
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
@@ -30,6 +30,11 @@ public class PointerDetector {
     Mat mHsvMat = new Mat();
     Mat mMask = new Mat();
     Mat mHierarchy = new Mat();
+
+    public PointerDetector() {
+        settings.minArea.subscribe(minArea -> setMinContourArea(minArea));
+        settings.maxArea.subscribe(maxArea -> setMaxContourArea(maxArea));        
+    }
 
     public void setHsvColor(Scalar hsvColor) {
         double minH = (hsvColor.val[0] >= 10) ? hsvColor.val[0]-10 : 0;

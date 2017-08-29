@@ -15,6 +15,9 @@ public class settings {
     public static BehaviorSubject<Integer> gain = BehaviorSubject.create(0);
     public static BehaviorSubject<Integer> upper = BehaviorSubject.create(100);
     
+    public static BehaviorSubject<Integer> minArea = BehaviorSubject.create(0);
+    public static BehaviorSubject<Integer> maxArea = BehaviorSubject.create(100);
+    
     
     private static class CaptureSize  {
     	@SuppressWarnings("unused")
