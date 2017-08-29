@@ -62,8 +62,12 @@ public class Webcam extends JFrame {
 	}
 
 	private static void subscribeForSettings(VideoCapture capture){
-		settings.width.subscribe(widthValue -> capture.set(Videoio.CAP_PROP_FRAME_WIDTH, widthValue));
-		settings.height.subscribe(heightValue -> capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, heightValue));
+		// settings.width.subscribe(widthValue -> capture.set(Videoio.CAP_PROP_FRAME_WIDTH, widthValue));
+		// settings.height.subscribe(heightValue -> capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, heightValue));
+		settings.captureSize(captureSize -> { 
+			capture.set(Videoio.CAP_PROP_FRAME_WIDTH, captureSize.w);
+			capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, captureSize.h);
+		});
 		settings.brightness.subscribe(brightnessValue -> capture.set(Videoio.CAP_PROP_BRIGHTNESS, brightnessValue));
 		settings.contrast.subscribe(contrastValue -> capture.set(Videoio.CAP_PROP_CONTRAST, contrastValue));
 		settings.saturation.subscribe(saturationValue -> capture.set(Videoio.CAP_PROP_SATURATION, saturationValue));

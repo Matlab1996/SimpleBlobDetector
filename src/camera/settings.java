@@ -18,19 +18,16 @@ public class settings {
     public static BehaviorSubject<Integer> minArea = BehaviorSubject.create(0);
     public static BehaviorSubject<Integer> maxArea = BehaviorSubject.create(100);
     
-    
-    private static class CaptureSize  {
-    	@SuppressWarnings("unused")
-		final int w;
-    	@SuppressWarnings("unused")
-		final int h;
-    	public CaptureSize (int w, int h){
-    		this.w = w;
-    		this.h = h;
-    	}
+    public static BehaviorSubject<CaptureSize> captureSize = BehaviorSubject.create(new CaptureSize(640, 480));   
+}
+
+ public class CaptureSize  {
+    @SuppressWarnings("unused")
+	final int w;
+    @SuppressWarnings("unused")
+	final int h;
+    public CaptureSize (int w, int h){
+    	this.w = w;
+    	this.h = h;
     }
-    
-    public static BehaviorSubject<CaptureSize> mat1 = BehaviorSubject.create(new CaptureSize(640, 480));
-    public static BehaviorSubject<CaptureSize> mat2 = BehaviorSubject.create(new CaptureSize(width.getValue(), height.getValue()));
-    
 }
