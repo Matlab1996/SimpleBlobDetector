@@ -22,7 +22,7 @@ public class Webcam extends JFrame {
 	public JPanel contentPane;
 	
 	public static JLabel lblWebcam, lblFps;
-	public static int 	WIDTH = 640, HEIGHT = 480;
+	//public static int 	WIDTH = 640, HEIGHT = 480;
 	
 	public static Scalar Upper = new Scalar(255);
 
@@ -42,8 +42,23 @@ public class Webcam extends JFrame {
 		contentPane.add(lblFps);
 
 		lblWebcam = new JLabel("New label");
-		lblWebcam.setBounds(0, 14, WIDTH, HEIGHT);
+		
+		// 1 способ
+		//BehaviorSubject.zip(
+		//	settings.width, 
+		//	settings.height, 
+		//		(w, h) -> w + " - " + h)
+		//				.subscribe(System.out::println);
+		
+		// 2 способ
+		lblWebcam.setBounds(0, 14, settings.width.getValue(), settings.height.getValue());
+		
+		// 3 способ
+		//settings.width.subscribe(widthValue -> lblWebcam.setBounds(0, 14, widthValue, settings.height.getValue()));
+		//settings.height.subscribe(heightValue -> lblWebcam.setBounds(0, 14, settings.width.getValue(), heightValue));
+		
 		contentPane.add(lblWebcam);
+		
 	}
 
 	private static void subscribeForSettings(VideoCapture capture){
@@ -62,18 +77,6 @@ public class Webcam extends JFrame {
 													capture.set((int) Upper.val[0], upperValue);
 													});
 	}
-	
-	//public static void Area(int b){
-		//VideoCapture capture = new VideoCapture();
-		//pointerDetector.setMaxContourArea(max);
-		//pointerDetector.setMinContourArea(min);
-		//maxArea
-		//if (checking.param_check_maxArea())
-			//capture.set(b, checking.maxArea);
-		//minArea
-		//if (checking.param_check_minArea())
-		//	capture.set(min, checking.minArea);
-	//}
 
 	public static void runMainLoop(){
 		ImageProcessor imageProcessor = new ImageProcessor();
@@ -86,14 +89,8 @@ public class Webcam extends JFrame {
 
 		VideoCapture capture = new VideoCapture(0);
 		subscribeForSettings(capture);
-
-		//Нужно или до установки FOURCC или после установить размер кадра - проверь, пожалуйста
-	
-		//capture.set(Videoio.CAP_PROP_FRAME_WIDTH, checking.width);
-		//capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, checking.height);
  		capture.set(Videoio.CAP_PROP_FOURCC, fourcc);
  		
-
 		if(capture.isOpened())
 		{
 			while(true)
@@ -111,13 +108,11 @@ public class Webcam extends JFrame {
 						captureTime = System.currentTimeMillis();
 					}
 
-					Mat frame = new Mat();
-					frame = webCamMatImage;
-					pointerDetector.process(frame, frame);
-					pointerDetector.drawDetectedPointers(frame);
-					pointerDetector.getContours();
+					pointerDetector.process(webCamMatImage, webCamMatImage);
+					//pointerDetector.drawDetectedPointers(webCamMatImage);
+					//pointerDetector.getContours();
 					
-					tempImage = imageProcessor.toBufferedImage(frame); 
+					tempImage = imageProcessor.toBufferedImage(webCamMatImage); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
 					lblWebcam.setIcon(imageIcon);
 			 		

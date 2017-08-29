@@ -383,27 +383,27 @@ public class Webcamprop extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switch((String)comboBox.getSelectedItem()){
-					case("320 x 240"):
-						{settings.width.onNext(320); settings.height.onNext(240); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
-						break;}
-					case("640 x 480"):
-						{settings.width.onNext(640); settings.height.onNext(480); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
-						break;}
-					case("800 x 600"):
-						{settings.width.onNext(800); settings.height.onNext(600); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
-						break;}
-					case("1024 x 768"):
-						{settings.width.onNext(1024); settings.height.onNext(768); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
-						break;}
-					case("1280 x 720"):
-						{settings.width.onNext(1280); settings.height.onNext(720); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
-						break;}
-					case("1280 x 1024"):
-						{settings.width.onNext(1280); settings.height.onNext(1024); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
-						break;}
-					case("1920 x 1080"):
-						{settings.width.onNext(1920); settings.height.onNext(1080); Webcam.lblWebcam.setSize(Webcam.WIDTH, Webcam.HEIGHT); MAIN.setSize(Webcam.WIDTH + 16, Webcam.HEIGHT + 54);
-						break;}
+				case("320 x 240"):
+					 {settings.width.onNext(320); settings.height.onNext(240); Webcam.lblWebcam.setSize(settings.width.getValue(), settings.height.getValue()); MAIN.setSize(settings.width.getValue() + 16, settings.height.getValue() + 54);
+					 break;}
+				case("640 x 480"):
+					 {settings.width.onNext(640); settings.height.onNext(480); Webcam.lblWebcam.setSize(settings.width.getValue(), settings.height.getValue()); MAIN.setSize(settings.width.getValue() + 16, settings.height.getValue() + 54);
+					 break;}
+				case("800 x 600"):
+					 {settings.width.onNext(800); settings.height.onNext(600); Webcam.lblWebcam.setSize(settings.width.getValue(), settings.height.getValue()); MAIN.setSize(settings.width.getValue() + 16, settings.height.getValue() + 54);
+					 break;}
+				case("1024 x 768"):
+					 {settings.width.onNext(1024); settings.height.onNext(768); Webcam.lblWebcam.setSize(settings.width.getValue(), settings.height.getValue()); MAIN.setSize(settings.width.getValue() + 16, settings.height.getValue() + 54);
+					 break;}
+				case("1280 x 720"):
+					{settings.width.onNext(1280); settings.height.onNext(720); Webcam.lblWebcam.setSize(settings.width.getValue(), settings.height.getValue()); MAIN.setSize(settings.width.getValue() + 16, settings.height.getValue() + 54);
+					break;}
+				case("1280 x 1024"):
+					{settings.width.onNext(1280); settings.height.onNext(1024); Webcam.lblWebcam.setSize(settings.width.getValue(), settings.height.getValue()); MAIN.setSize(settings.width.getValue() + 16, settings.height.getValue() + 54);
+					break;}
+				case("1920 x 1080"):
+					{settings.width.onNext(1920); settings.height.onNext(1080); Webcam.lblWebcam.setSize(settings.width.getValue(), settings.height.getValue()); MAIN.setSize(settings.width.getValue() + 16, settings.height.getValue() + 54);
+					break;}
 				}
 			}
 		});

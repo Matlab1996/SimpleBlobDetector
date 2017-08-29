@@ -15,4 +15,19 @@ public class settings {
     public static BehaviorSubject<Integer> gain = BehaviorSubject.create(0);
     public static BehaviorSubject<Integer> upper = BehaviorSubject.create(100);
     
+    
+    private static class CaptureSize  {
+    	@SuppressWarnings("unused")
+		final int w;
+    	@SuppressWarnings("unused")
+		final int h;
+    	public CaptureSize (int w, int h){
+    		this.w = w;
+    		this.h = h;
+    	}
+    }
+    
+    public static BehaviorSubject<CaptureSize> mat1 = BehaviorSubject.create(new CaptureSize(640, 480));
+    public static BehaviorSubject<CaptureSize> mat2 = BehaviorSubject.create(new CaptureSize(width.getValue(), height.getValue()));
+    
 }
