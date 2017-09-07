@@ -22,7 +22,6 @@ public class Webcam extends JFrame {
 	public JPanel contentPane;
 	
 	public static JLabel lblWebcam, lblFps;
-	//public static int 	WIDTH = 640, HEIGHT = 480;
 	
 	public static Scalar Upper = new Scalar(255);
 
@@ -42,21 +41,7 @@ public class Webcam extends JFrame {
 		contentPane.add(lblFps);
 
 		lblWebcam = new JLabel("New label");
-		
-		// 1 способ
-		//BehaviorSubject.zip(
-		//	settings.width, 
-		//	settings.height, 
-		//		(w, h) -> w + " - " + h)
-		//				.subscribe(System.out::println);
-		
-		// 2 способ
-		lblWebcam.setBounds(0, 14, settings.width.getValue(), settings.height.getValue());
-		
-		// 3 способ
-		//settings.width.subscribe(widthValue -> lblWebcam.setBounds(0, 14, widthValue, settings.height.getValue()));
-		//settings.height.subscribe(heightValue -> lblWebcam.setBounds(0, 14, settings.width.getValue(), heightValue));
-		
+		settings.captureSize.subscribe(captureSize -> lblWebcam.setBounds(0, 14, captureSize.h, captureSize.w));
 		contentPane.add(lblWebcam);
 		
 	}
@@ -64,7 +49,7 @@ public class Webcam extends JFrame {
 	private static void subscribeForSettings(VideoCapture capture){
 		// settings.width.subscribe(widthValue -> capture.set(Videoio.CAP_PROP_FRAME_WIDTH, widthValue));
 		// settings.height.subscribe(heightValue -> capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, heightValue));
-		settings.captureSize(captureSize -> { 
+		settings.captureSize.subscribe(captureSize -> { 
 			capture.set(Videoio.CAP_PROP_FRAME_WIDTH, captureSize.w);
 			capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, captureSize.h);
 		});
@@ -80,6 +65,8 @@ public class Webcam extends JFrame {
 													pointerDetector.setHsvColor(Upper);
 													capture.set((int) Upper.val[0], upperValue);
 													});
+		settings.maxArea.subscribe(Area -> capture.set((int) pointerDetector.mMaxContourArea, Area));
+		settings.minArea.subscribe(Area -> capture.set((int) pointerDetector.mMinContourArea, Area));
 	}
 
 	public static void runMainLoop(){
@@ -112,9 +99,10 @@ public class Webcam extends JFrame {
 						captureTime = System.currentTimeMillis();
 					}
 
-					pointerDetector.process(webCamMatImage, webCamMatImage);
-					//pointerDetector.drawDetectedPointers(webCamMatImage);
-					//pointerDetector.getContours();
+					Mat output = new Mat();
+					pointerDetector.process(webCamMatImage, output);
+					pointerDetector.getContours();
+					pointerDetector.drawDetectedPointers(webCamMatImage);
 					
 					tempImage = imageProcessor.toBufferedImage(webCamMatImage); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");

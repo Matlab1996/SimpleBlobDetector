@@ -12,9 +12,7 @@ import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
 public class PointerDetector {
-	
-    static List<Mat> channel = new ArrayList<Mat>(3);
-    
+    List<Mat> channel = new ArrayList<>(3);
 	// Нижние и Верхние границы для проверки диапазона в цветовом пространстве HSV
     Scalar mLowerBound = new Scalar(0);
     Scalar mUpperBound = new Scalar(255);
@@ -31,6 +29,8 @@ public class PointerDetector {
     Mat mMask = new Mat();
     Mat mHierarchy = new Mat();
 
+    List<MatOfPoint> contours = new ArrayList<>();
+    
     public PointerDetector() {
         settings.minArea.subscribe(minArea -> setMinContourArea(minArea));
         settings.maxArea.subscribe(maxArea -> setMaxContourArea(maxArea));        
@@ -65,28 +65,27 @@ public class PointerDetector {
     }
 
     public void process(Mat rgbaImage, Mat mDilatedMask) {
-        //Размывает изображение и субдискретизирует его
     	Imgproc.pyrDown(rgbaImage, mPyrDownMat);
         Imgproc.pyrUp(mPyrDownMat, mPyrDownMat);
 
         Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2YCrCb);
         
-        //Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
+        //Core.inRange(mHsvMat, new Scalar(mLowerBound.val[0], 0, 0), new Scalar(mUpperBound.val[0], 0, 0), mMask);
         
-        Core.split(mHsvMat, channel); 
+		Core.split(mHsvMat, channel ); 
         Mat Y = channel.get(0);
-        //Mat Cr = channel.get(1);
+        //Mat Cr = channel.get(1); 
         //Mat Cb = channel.get(2);
         Imgproc.threshold(Y, Y, mLowerBound.val[0], mUpperBound.val[0], Imgproc.THRESH_BINARY);
         
         Core.bitwise_not(Y, mMask);
-        //Расширяет изображение при помощи определенного элемента структурирования
-        //Mat element1 = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, new  Size(12, 12));
-        Imgproc.dilate(mMask, mDilatedMask, new Mat());
-
-        List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
-
-        Imgproc.findContours(mDilatedMask, contours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        
+        Mat canny = new Mat();
+        Imgproc.Canny(mMask, canny, 20, 40, 3, true);
+        
+        Imgproc.dilate(canny, mDilatedMask, new Mat());
+        
+        Imgproc.findContours(mDilatedMask, mContours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
         Iterator<MatOfPoint> each = contours.iterator();
         
@@ -100,17 +99,20 @@ public class PointerDetector {
                 mContours.add(contour);
             }
         }
+       
     }
         
     public List<MatOfPoint> getContours() {
         return mContours;
     }
     
-    public void drawDetectedPointers(Mat image){
-    	if(!mContours.isEmpty()){
-    		Imgproc.drawContours(image, mContours, 1, new Scalar(255,0,0),5);
-    		System.out.println("detected");
-    	}
+	public void drawDetectedPointers(Mat image){
+		Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
+    		for (int i = 0; i < mContours.size(); i++) {
+    			Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
+    			System.out.println("detected");
+    		}
+    	mContours.clear();
     }
 
 }
