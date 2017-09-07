@@ -65,12 +65,14 @@ public class PointerDetector {
     }
 
     public void process(Mat rgbaImage, Mat mDilatedMask) {
-    	Imgproc.pyrDown(rgbaImage, mPyrDownMat);
-        Imgproc.pyrUp(mPyrDownMat, mPyrDownMat);
+        //Удаляем старые контуры
+        mContours.clear();
 
-        Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2YCrCb);
+    	// Уменьшаем картинку перед обработкой 
+        // Imgproc.pyrDown(rgbaImage, mPyrDownMat);
+        // Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2YCrCb);
         
-        //Core.inRange(mHsvMat, new Scalar(mLowerBound.val[0], 0, 0), new Scalar(mUpperBound.val[0], 0, 0), mMask);
+        Imgproc.cvtColor(rgbaImage, mHsvMat, Imgproc.COLOR_RGB2YCrCb);
         
 		Core.split(mHsvMat, channel ); 
         Mat Y = channel.get(0);
@@ -82,15 +84,11 @@ public class PointerDetector {
         
         Mat canny = new Mat();
         Imgproc.Canny(mMask, canny, 20, 40, 3, true);
-        
         Imgproc.dilate(canny, mDilatedMask, new Mat());
-        
         Imgproc.findContours(mDilatedMask, mContours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
         Iterator<MatOfPoint> each = contours.iterator();
-        
         // Filter contours by area and resize to fit the original image size
-        
         while (each.hasNext()) {
             MatOfPoint contour = each.next();
             double area = Imgproc.contourArea(contour);
@@ -99,7 +97,6 @@ public class PointerDetector {
                 mContours.add(contour);
             }
         }
-       
     }
         
     public List<MatOfPoint> getContours() {
@@ -112,7 +109,6 @@ public class PointerDetector {
     			Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
     			System.out.println("detected");
     		}
-    	mContours.clear();
     }
 
 }
