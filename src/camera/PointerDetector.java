@@ -8,8 +8,10 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
 
 public class PointerDetector {
     List<Mat> channel = new ArrayList<>(3);
@@ -110,5 +112,16 @@ public class PointerDetector {
     			System.out.println("detected");
     		}
     }
+	
+	public void centerOfContour(Mat rgbaImage) {
+		List<Moments> mu = new ArrayList<Moments>(mContours.size());
+	    for (int i = 0; i < mContours.size(); i++) {
+	        mu.add(i, Imgproc.moments(mContours.get(i), false));
+	        Moments p = mu.get(i);
+	        int x = (int) (p.get_m10() / p.get_m00());
+	        int y = (int) (p.get_m01() / p.get_m00());
+	        Imgproc.circle(rgbaImage, new Point(x, y), 4, new Scalar(255,49,0,255));
+	    }
+	}
 
 }

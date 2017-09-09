@@ -26,6 +26,7 @@ public class Webcam extends JFrame {
 	public static Scalar Upper = new Scalar(255);
 
 	public static PointerDetector pointerDetector = new PointerDetector();
+	public static ImageProcessor imageProcessor = new ImageProcessor();
 
 	public Webcam() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,7 +71,6 @@ public class Webcam extends JFrame {
 	}
 
 	public static void runMainLoop(){
-		ImageProcessor imageProcessor = new ImageProcessor();
 		Mat webCamMatImage = new Mat();
 		Image tempImage;
 		
@@ -103,6 +103,7 @@ public class Webcam extends JFrame {
 					pointerDetector.process(webCamMatImage, output);
 					pointerDetector.getContours();
 					pointerDetector.drawDetectedPointers(webCamMatImage);
+					pointerDetector.centerOfContour(webCamMatImage);
 					
 					tempImage = imageProcessor.toBufferedImage(webCamMatImage); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
