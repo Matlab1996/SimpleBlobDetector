@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/OpenCV"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RxJava"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencv"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/rxjava"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/opencv"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
