@@ -6,8 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -38,9 +39,9 @@ public class Webcamprop extends JFrame {
 	PointerDetector pointerDetector = new PointerDetector();
 
 	public static void main(String[] args) throws IOException {
-		URL executionDirPath = Webcamprop.class.getProtectionDomain().getCodeSource().getLocation();
 
-		System.load(executionDirPath.toString() + "/opencv_java330.dll");
+		File name = new File ("opencv_java330.dll");
+		System.load(name.getAbsolutePath());
 
 		EventQueue.invokeLater(new Runnable() {
 			@Override
