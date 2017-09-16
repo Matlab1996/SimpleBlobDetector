@@ -15,17 +15,13 @@ import org.opencv.imgproc.Moments;
 
 public class PointerDetector {
     List<Mat> channel = new ArrayList<>(3);
-	// Нижние и Верхние границы для проверки диапазона в цветовом пространстве HSV
-    Scalar mLowerBound = new Scalar(0);
+	Scalar mLowerBound = new Scalar(0);
     Scalar mUpperBound = new Scalar(255);
-    // Минимальная область контура для фильтрации контуров
-    double mMinContourArea = 0;
+   double mMinContourArea = 0;
     double mMaxContourArea = 100;
-    // Цветной радиус для проверки диапазона в цветовом пространстве HSV
     private Mat mSpectrum = new Mat();
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
 
-    // Кэш
     Mat mPyrDownMat = new Mat();
     Mat mHsvMat = new Mat();
     Mat mMask = new Mat();
@@ -67,10 +63,8 @@ public class PointerDetector {
     }
 
     public void process(Mat rgbaImage, Mat mDilatedMask) {
-        //Удаляем старые контуры
         mContours.clear();
 
-    	// Уменьшаем картинку перед обработкой 
         // Imgproc.pyrDown(rgbaImage, mPyrDownMat);
         // Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2YCrCb);
         
