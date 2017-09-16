@@ -93,7 +93,6 @@ public class Webcam extends JFrame {
 				if(!webCamMatImage.empty())
 				{
 					FRAMEcount++;
-					//Обновляем счетчик FPS
 					if (FRAMEcount>500){
 						FRAMEcount = 0;
 						captureTime = System.currentTimeMillis();
