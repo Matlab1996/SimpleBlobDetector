@@ -103,7 +103,6 @@ public class PointerDetector {
 		Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
     		for (int i = 0; i < mContours.size(); i++) {
     			Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
-    			System.out.println("detected");
     		}
     }
 	
