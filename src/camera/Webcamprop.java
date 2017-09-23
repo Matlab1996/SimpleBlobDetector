@@ -40,7 +40,7 @@ public class Webcamprop extends JFrame {
 
 	public static void main(String[] args) throws IOException {
 
-		File name = new File ("C:\\lib\\opencv\\build\\java\\x64\\opencv_java330.dll");
+		File name = new File ("opencv_java330.dll");
 		System.load(name.getAbsolutePath());
 
 		EventQueue.invokeLater(new Runnable() {
