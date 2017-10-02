@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -19,9 +18,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import camera.Webcam;
-import camera.Webcamprop;
+import org.opencv.core.Core;
+
 import camera.settings.CaptureSize;
+
 
 @SuppressWarnings("serial")
 public class Webcamprop extends JFrame {
@@ -40,9 +40,12 @@ public class Webcamprop extends JFrame {
 
 	public static void main(String[] args) throws IOException {
 
-		File name = new File ("C:\\lib\\opencv\\build\\java\\x64\\opencv_java330.dll");
-		System.load(name.getAbsolutePath());
+		//Windows
+		//File name = new File ("opencv_java330.dll");
+		//System.load(name.getAbsolutePath());
 
+		//Linux
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
