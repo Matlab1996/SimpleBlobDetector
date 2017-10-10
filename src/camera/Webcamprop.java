@@ -22,7 +22,6 @@ import org.opencv.core.Core;
 
 import camera.settings.CaptureSize;
 
-
 @SuppressWarnings("serial")
 public class Webcamprop extends JFrame {
 

@@ -5,6 +5,7 @@ import java.awt.image.DataBufferByte;
 
 import org.opencv.core.Mat;
 
+
 public class ImageProcessor {
 	public BufferedImage toBufferedImage(Mat matrix)
 	{

@@ -14,8 +14,6 @@ import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
 
-import camera.ImageProcessor;
-
 @SuppressWarnings("serial")
 public class Webcam extends JFrame {
 
