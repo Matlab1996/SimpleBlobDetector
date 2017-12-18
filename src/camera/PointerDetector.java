@@ -14,6 +14,7 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
 
 public class PointerDetector {
+	static int x, y;
     List<Mat> channel = new ArrayList<>(3);
 	Scalar mLowerBound = new Scalar(0);
     Scalar mUpperBound = new Scalar(255);
@@ -111,8 +112,8 @@ public class PointerDetector {
 	    for (int i = 0; i < mContours.size(); i++) {
 	        mu.add(i, Imgproc.moments(mContours.get(i), false));
 	        Moments p = mu.get(i);
-	        int x = (int) (p.get_m10() / p.get_m00());
-	        int y = (int) (p.get_m01() / p.get_m00());
+	        x = (int) (p.get_m10() / p.get_m00());
+	        y = (int) (p.get_m01() / p.get_m00());
 	        Imgproc.circle(rgbaImage, new Point(x, y), 4, new Scalar(255,49,0,255));
 	    }
 	}

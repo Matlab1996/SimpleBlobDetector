@@ -1,5 +1,6 @@
 package camera;
 
+import java.awt.AWTException;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -70,7 +71,7 @@ public class Webcam extends JFrame {
 		settings.minArea.subscribe(Area -> capture.set((int) pointerDetector.mMinContourArea, Area));
 	}
 
-	public static void runMainLoop(){
+	public static void runMainLoop() throws AWTException{
 		Mat webCamMatImage = new Mat();
 		Image tempImage;
 		
@@ -86,6 +87,7 @@ public class Webcam extends JFrame {
 		{
 			while(true)
 			{
+				Mause.control(PointerDetector.x, PointerDetector.y);
 				
 				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
 	
