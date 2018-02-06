@@ -1,5 +1,6 @@
 package camera;
 
+import java.awt.AWTException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -100,10 +101,11 @@ public class PointerDetector {
         return mContours;
     }
     
-	public void drawDetectedPointers(Mat image){
+	public void drawDetectedPointers(Mat image) throws AWTException{
 		Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
     		for (int i = 0; i < mContours.size(); i++) {
     			Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
+    			Mause.control(x, y);
     		}
     }
 	

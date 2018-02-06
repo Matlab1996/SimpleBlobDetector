@@ -49,8 +49,6 @@ public class Webcam extends JFrame {
 	}
 
 	private static void subscribeForSettings(VideoCapture capture){
-		// settings.width.subscribe(widthValue -> capture.set(Videoio.CAP_PROP_FRAME_WIDTH, widthValue));
-		// settings.height.subscribe(heightValue -> capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, heightValue));
 		settings.captureSize.subscribe(captureSize -> { 
 			capture.set(Videoio.CAP_PROP_FRAME_WIDTH, captureSize.w);
 			capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, captureSize.h);
@@ -87,10 +85,7 @@ public class Webcam extends JFrame {
 		{
 			while(true)
 			{
-				Mause.control(PointerDetector.x, PointerDetector.y);
-				
 				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
-	
 				capture.read(webCamMatImage);
 				if(!webCamMatImage.empty())
 				{

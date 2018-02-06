@@ -37,13 +37,10 @@ public class Webcamprop extends JFrame {
 	Webcam MAIN;
 
 	PointerDetector pointerDetector = new PointerDetector();
-
+	
 	public static void main(String[] args) throws IOException, AWTException {
-
 		System.load("C:\\lib\\opencv\\build\\java\\x64\\opencv_java330.dll");
-
-		EventQueue.invokeLater(new Runnable() {
-			@Override
+		EventQueue.invokeLater(new Runnable() {//
 			public void run() {
 				try {
 					Webcamprop frame = new Webcamprop();
@@ -69,16 +66,13 @@ public class Webcamprop extends JFrame {
 
 		btnCamera = new JButton("CAMERA");
 		btnCamera.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				MAIN.setVisible(true);
 			}
 		});
 		btnCamera.setBounds(338, 578, 89, 23);
 		contentPane.add(btnCamera);
-
 		slider_brightness = new JSlider(-64, 64, 0);
-
 		slider_brightness.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent arg0) {
