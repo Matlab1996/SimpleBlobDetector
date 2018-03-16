@@ -38,7 +38,7 @@ public class Webcamprop extends JFrame {
 	PointerDetector pointerDetector = new PointerDetector();
 	
 	public static void main(String[] args) throws IOException, AWTException {
-		System.load("C:\\lib\\opencv\\build\\java\\x64\\opencv_java330.dll");
+		System.load("/Users/matlab96/SimpleBlobDetector/libopencv_java341.dylib");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
