@@ -27,7 +27,6 @@ public class settings {
     
     public static BehaviorSubject<CaptureSize> captureSize = BehaviorSubject.create(new CaptureSize(640, 480));   
 
-    
 }
 
 

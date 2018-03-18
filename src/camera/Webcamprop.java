@@ -1,13 +1,12 @@
 package camera;
 
+import java.awt.AWTException;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.io.IOException;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -37,7 +36,7 @@ public class Webcamprop extends JFrame {
 
 	PointerDetector pointerDetector = new PointerDetector();
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws AWTException{
 
 		//Windows
 		//File name = new File ("opencv_java330.dll");

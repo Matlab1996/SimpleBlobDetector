@@ -1,5 +1,6 @@
 package camera;
 
+import java.awt.AWTException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +22,7 @@ public class PointerDetector {
     double mMaxContourArea = 100;
     private Mat mSpectrum = new Mat();
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
+    int x, y;
 
     Mat mPyrDownMat = new Mat();
     Mat mHsvMat = new Mat();
@@ -99,10 +101,11 @@ public class PointerDetector {
         return mContours;
     }
     
-	public void drawDetectedPointers(Mat image){
+	public void drawDetectedPointers(Mat image) throws AWTException{
 		Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
     		for (int i = 0; i < mContours.size(); i++) {
     			Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
+    			Mause.control(x, y);
     		}
     }
 	
@@ -111,8 +114,8 @@ public class PointerDetector {
 	    for (int i = 0; i < mContours.size(); i++) {
 	        mu.add(i, Imgproc.moments(mContours.get(i), false));
 	        Moments p = mu.get(i);
-	        int x = (int) (p.get_m10() / p.get_m00());
-	        int y = (int) (p.get_m01() / p.get_m00());
+	        x = (int) (p.get_m10() / p.get_m00());
+	        y = (int) (p.get_m01() / p.get_m00());
 	        Imgproc.circle(rgbaImage, new Point(x, y), 4, new Scalar(255,49,0,255));
 	    }
 	}

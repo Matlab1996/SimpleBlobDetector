@@ -1,5 +1,6 @@
 package camera;
 
+import java.awt.AWTException;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -68,7 +69,7 @@ public class Webcam extends JFrame {
 		settings.minArea.subscribe(Area -> capture.set((int) pointerDetector.mMinContourArea, Area));
 	}
 
-	public static void runMainLoop(){
+	public static void runMainLoop() throws AWTException{
 		Mat webCamMatImage = new Mat();
 		Image tempImage;
 		
@@ -99,7 +100,9 @@ public class Webcam extends JFrame {
 					Mat output = new Mat();
 					pointerDetector.process(webCamMatImage, output);
 					pointerDetector.getContours();
+					
 					pointerDetector.drawDetectedPointers(webCamMatImage);
+					
 					pointerDetector.centerOfContour(webCamMatImage);
 					
 					tempImage = imageProcessor.toBufferedImage(webCamMatImage); 

@@ -1,0 +1,2 @@
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/libopencv_java320.so - для so файла
+java -jar target/Webcam-0.0.1-SNAPSHOT-jar-with-dependencies.jar - для запуска jar
