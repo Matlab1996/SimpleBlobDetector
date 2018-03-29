@@ -59,10 +59,7 @@ public class Webcam extends JFrame {
 		settings.exposure.subscribe(exposureValue -> capture.set(Videoio.CAP_PROP_EXPOSURE, exposureValue));
 		settings.gamma.subscribe(gammaValue -> capture.set(Videoio.CAP_PROP_GAMMA, gammaValue));
 		settings.gain.subscribe(gainValue -> capture.set(Videoio.CAP_PROP_GAIN, gainValue));
-		settings.upper.subscribe(upperValue -> {
-													pointerDetector.setHsvColor(Upper);
-													capture.set((int) Upper.val[0], upperValue);
-													});
+		settings.upper.subscribe(upperValue -> pointerDetector.setHsvColor(upperValue));
 		settings.maxArea.subscribe(Area -> capture.set((int) pointerDetector.mMaxContourArea, Area));
 		settings.minArea.subscribe(Area -> capture.set((int) pointerDetector.mMinContourArea, Area));
 	}

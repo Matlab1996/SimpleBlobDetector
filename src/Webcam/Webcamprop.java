@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import org.opencv.core.Scalar;
+
 import Webcam.Webcamprop;
 import Webcam.settings.CaptureSize;
 
@@ -266,11 +268,11 @@ public class Webcamprop extends JFrame {
 		slider_mUpper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				settings.upper.onNext(slider_mUpper.getValue());
+				settings.upper.onNext(new Scalar (slider_mUpper.getValue()));
 				// Webcam.Upper.val[0] = slider_mUpper.getValue();
 				settings.upper.subscribe(value -> {
-					textField_11.setText("" + value);
-					slider_mUpper.setValue(value);
+					textField_11.setText("" + (int) value.val[0]);
+					slider_mUpper.setValue((int) value.val[0]);
 				});
 			}
 		});

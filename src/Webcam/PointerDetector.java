@@ -19,7 +19,7 @@ public class PointerDetector {
     List<Mat> channel = new ArrayList<>(3);
 	Scalar mLowerBound = new Scalar(0);
     Scalar mUpperBound = new Scalar(255);
-   double mMinContourArea = 0;
+    double mMinContourArea = 0;
     double mMaxContourArea = 100;
     private Mat mSpectrum = new Mat();
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
@@ -103,10 +103,10 @@ public class PointerDetector {
     
 	public void drawDetectedPointers(Mat image) throws AWTException{
 		Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
-    		for (int i = 0; i < mContours.size(); i++) {
-    			Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
-    			Mause.control(x, y);
-    		}
+    	for (int i = 0; i < mContours.size(); i++) {
+    		Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
+    		//Mause.control(x, y);
+    	}
     }
 	
 	public void centerOfContour(Mat rgbaImage) {
