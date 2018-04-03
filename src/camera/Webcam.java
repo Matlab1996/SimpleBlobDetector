@@ -66,8 +66,12 @@ public class Webcam extends JFrame {
 													pointerDetector.setHsvColor(Upper);
 													capture.set((int) Upper.val[0], upperValue);
 													});
-		settings.maxArea.subscribe(Area -> capture.set((int) pointerDetector.mMaxContourArea, Area));
-		settings.minArea.subscribe(Area -> capture.set((int) pointerDetector.mMinContourArea, Area));
+		// capture.set принимает первым параметром свойства камеры (код), а вторым - значение, которое необходимо установить
+		// у камеры нет свойства mMaxContourArea и mMinContourArea, только экспозиция и т.п.
+		// я закомментировал эти строки, т.к. этот код может вызвать странное поведение программы.
+		// К примеру, когда значение pointerDetector.mMaxContourArea совпадет с Videoio.CAP_PROP_EXPOSURE, то изменится экспозиция :)
+		// settings.maxArea.subscribe(Area -> capture.set((int) pointerDetector.mMaxContourArea, Area));
+		// settings.minArea.subscribe(Area -> capture.set((int) pointerDetector.mMinContourArea, Area));
 	}
 
 	public static void runMainLoop(){
