@@ -1,5 +1,6 @@
-package camera;
+package Webcam;
 
+import java.awt.AWTException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,18 +15,15 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
 
 public class PointerDetector {
+	static int x, y;
     List<Mat> channel = new ArrayList<>(3);
-	// Нижние и Верхние границы для проверки диапазона в цветовом пространстве HSV
-    Scalar mLowerBound = new Scalar(0);
+	Scalar mLowerBound = new Scalar(0);
     Scalar mUpperBound = new Scalar(255);
-    // Минимальная область контура для фильтрации контуров
     double mMinContourArea = 0;
     double mMaxContourArea = 100;
-    // Цветной радиус для проверки диапазона в цветовом пространстве HSV
     private Mat mSpectrum = new Mat();
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
 
-    // Кэш
     Mat mPyrDownMat = new Mat();
     Mat mHsvMat = new Mat();
     Mat mMask = new Mat();
@@ -67,10 +65,8 @@ public class PointerDetector {
     }
 
     public void process(Mat rgbaImage, Mat mDilatedMask) {
-        //Удаляем старые контуры
         mContours.clear();
 
-    	// Уменьшаем картинку перед обработкой 
         // Imgproc.pyrDown(rgbaImage, mPyrDownMat);
         // Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2YCrCb);
         
@@ -105,12 +101,12 @@ public class PointerDetector {
         return mContours;
     }
     
-	public void drawDetectedPointers(Mat image){
+	public void drawDetectedPointers(Mat image) throws AWTException{
 		Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
-    		for (int i = 0; i < mContours.size(); i++) {
-    			Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
-    			System.out.println("detected");
-    		}
+    	for (int i = 0; i < mContours.size(); i++) {
+    		Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
+    		//Mause.control(x, y);
+    	}
     }
 	
 	public void centerOfContour(Mat rgbaImage) {
@@ -118,8 +114,8 @@ public class PointerDetector {
 	    for (int i = 0; i < mContours.size(); i++) {
 	        mu.add(i, Imgproc.moments(mContours.get(i), false));
 	        Moments p = mu.get(i);
-	        int x = (int) (p.get_m10() / p.get_m00());
-	        int y = (int) (p.get_m01() / p.get_m00());
+	        x = (int) (p.get_m10() / p.get_m00());
+	        y = (int) (p.get_m01() / p.get_m00());
 	        Imgproc.circle(rgbaImage, new Point(x, y), 4, new Scalar(255,49,0,255));
 	    }
 	}

@@ -1,12 +1,12 @@
-package camera;
+package Webcam;
 
+import java.awt.AWTException;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -19,9 +19,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import camera.Webcam;
-import camera.Webcamprop;
-import camera.settings.CaptureSize;
+import org.opencv.core.Scalar;
+
+import Webcam.Webcamprop;
+import Webcam.settings.CaptureSize;
 
 @SuppressWarnings("serial")
 public class Webcamprop extends JFrame {
@@ -37,18 +38,15 @@ public class Webcamprop extends JFrame {
 	Webcam MAIN;
 
 	PointerDetector pointerDetector = new PointerDetector();
-
-	public static void main(String[] args) throws IOException {
-
-		File name = new File ("opencv_java330.dll");
-		System.load(name.getAbsolutePath());
-
+	
+	public static void main(String[] args) throws IOException, AWTException {
+		System.load("C:\\lib\\opencv\\build\\java\\x64\\opencv_java330.dll");
 		EventQueue.invokeLater(new Runnable() {
-			@Override
 			public void run() {
 				try {
 					Webcamprop frame = new Webcamprop();
 					frame.setVisible(true);
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -69,16 +67,13 @@ public class Webcamprop extends JFrame {
 
 		btnCamera = new JButton("CAMERA");
 		btnCamera.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				MAIN.setVisible(true);
 			}
 		});
 		btnCamera.setBounds(338, 578, 89, 23);
 		contentPane.add(btnCamera);
-
 		slider_brightness = new JSlider(-64, 64, 0);
-
 		slider_brightness.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent arg0) {
@@ -273,7 +268,7 @@ public class Webcamprop extends JFrame {
 		slider_mUpper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				settings.upper.onNext(slider_mUpper.getValue());
+				settings.upper.onNext(new Scalar (slider_mUpper.getValue()));
 				// Webcam.Upper.val[0] = slider_mUpper.getValue();
 			}
 		});

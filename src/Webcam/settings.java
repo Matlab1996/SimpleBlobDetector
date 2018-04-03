@@ -1,4 +1,6 @@
-package camera;
+package Webcam;
+
+import org.opencv.core.Scalar;
 
 import rx.subjects.BehaviorSubject;
 
@@ -11,7 +13,7 @@ public class settings {
     public static BehaviorSubject<Integer> exposure = BehaviorSubject.create(-6);
     public static BehaviorSubject<Integer> gamma = BehaviorSubject.create(100);
     public static BehaviorSubject<Integer> gain = BehaviorSubject.create(0);
-    public static BehaviorSubject<Integer> upper = BehaviorSubject.create(100);
+    public static BehaviorSubject<Scalar> upper = BehaviorSubject.create(new Scalar(100));
     
     public static BehaviorSubject<Integer> minArea = BehaviorSubject.create(0);
     public static BehaviorSubject<Integer> maxArea = BehaviorSubject.create(100);

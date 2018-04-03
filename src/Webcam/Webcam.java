@@ -1,5 +1,6 @@
-package camera;
+package Webcam;
 
+import java.awt.AWTException;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -13,8 +14,6 @@ import org.opencv.core.Scalar;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
-
-import camera.ImageProcessor;
 
 @SuppressWarnings("serial")
 public class Webcam extends JFrame {
@@ -48,8 +47,6 @@ public class Webcam extends JFrame {
 	}
 
 	private static void subscribeForSettings(VideoCapture capture){
-		// settings.width.subscribe(widthValue -> capture.set(Videoio.CAP_PROP_FRAME_WIDTH, widthValue));
-		// settings.height.subscribe(heightValue -> capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, heightValue));
 		settings.captureSize.subscribe(captureSize -> { 
 			capture.set(Videoio.CAP_PROP_FRAME_WIDTH, captureSize.w);
 			capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, captureSize.h);
@@ -62,10 +59,7 @@ public class Webcam extends JFrame {
 		settings.exposure.subscribe(exposureValue -> capture.set(Videoio.CAP_PROP_EXPOSURE, exposureValue));
 		settings.gamma.subscribe(gammaValue -> capture.set(Videoio.CAP_PROP_GAMMA, gammaValue));
 		settings.gain.subscribe(gainValue -> capture.set(Videoio.CAP_PROP_GAIN, gainValue));
-		settings.upper.subscribe(upperValue -> {
-													pointerDetector.setHsvColor(Upper);
-													capture.set((int) Upper.val[0], upperValue);
-													});
+		settings.upper.subscribe(upperValue -> pointerDetector.setHsvColor(upperValue));
 		// capture.set принимает первым параметром свойства камеры (код), а вторым - значение, которое необходимо установить
 		// у камеры нет свойства mMaxContourArea и mMinContourArea, только экспозиция и т.п.
 		// я закомментировал эти строки, т.к. этот код может вызвать странное поведение программы.
@@ -74,7 +68,7 @@ public class Webcam extends JFrame {
 		// settings.minArea.subscribe(Area -> capture.set((int) pointerDetector.mMinContourArea, Area));
 	}
 
-	public static void runMainLoop(){
+	public static void runMainLoop() throws AWTException{
 		Mat webCamMatImage = new Mat();
 		Image tempImage;
 		
@@ -90,14 +84,11 @@ public class Webcam extends JFrame {
 		{
 			while(true)
 			{
-				
 				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
-	
 				capture.read(webCamMatImage);
 				if(!webCamMatImage.empty())
 				{
 					FRAMEcount++;
-					//Обновляем счетчик FPS
 					if (FRAMEcount>500){
 						FRAMEcount = 0;
 						captureTime = System.currentTimeMillis();
