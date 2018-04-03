@@ -60,12 +60,8 @@ public class Webcam extends JFrame {
 		settings.gamma.subscribe(gammaValue -> capture.set(Videoio.CAP_PROP_GAMMA, gammaValue));
 		settings.gain.subscribe(gainValue -> capture.set(Videoio.CAP_PROP_GAIN, gainValue));
 		settings.upper.subscribe(upperValue -> pointerDetector.setHsvColor(upperValue));
-		// capture.set принимает первым параметром свойства камеры (код), а вторым - значение, которое необходимо установить
-		// у камеры нет свойства mMaxContourArea и mMinContourArea, только экспозиция и т.п.
-		// я закомментировал эти строки, т.к. этот код может вызвать странное поведение программы.
-		// К примеру, когда значение pointerDetector.mMaxContourArea совпадет с Videoio.CAP_PROP_EXPOSURE, то изменится экспозиция :)
-		// settings.maxArea.subscribe(Area -> capture.set((int) pointerDetector.mMaxContourArea, Area));
-		// settings.minArea.subscribe(Area -> capture.set((int) pointerDetector.mMinContourArea, Area));
+		settings.minArea.subscribe(minArea -> pointerDetector.setMinContourArea(minArea));
+        settings.maxArea.subscribe(maxArea -> pointerDetector.setMaxContourArea(maxArea));
 	}
 
 	public static void runMainLoop() throws AWTException{
@@ -94,8 +90,7 @@ public class Webcam extends JFrame {
 						captureTime = System.currentTimeMillis();
 					}
 
-					Mat output = new Mat();
-					pointerDetector.process(webCamMatImage, output);
+					pointerDetector.process(webCamMatImage, webCamMatImage);
 					pointerDetector.getContours();
 					pointerDetector.drawDetectedPointers(webCamMatImage);
 					pointerDetector.centerOfContour(webCamMatImage);

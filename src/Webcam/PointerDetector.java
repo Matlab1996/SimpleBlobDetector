@@ -30,11 +30,6 @@ public class PointerDetector {
     Mat mHierarchy = new Mat();
 
     List<MatOfPoint> contours = new ArrayList<>();
-    
-    public PointerDetector() {
-        settings.minArea.subscribe(minArea -> setMinContourArea(minArea));
-        settings.maxArea.subscribe(maxArea -> setMaxContourArea(maxArea));        
-    }
 
     public void setHsvColor(Scalar hsvColor) {
         double minH = (hsvColor.val[0] >= 10) ? hsvColor.val[0]-10 : 0;
@@ -102,7 +97,7 @@ public class PointerDetector {
     }
     
 	public void drawDetectedPointers(Mat image) throws AWTException{
-		Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
+		//Imgproc.cvtColor(image, image, Imgproc.COLOR_BGR2RGB);
     	for (int i = 0; i < mContours.size(); i++) {
     		Imgproc.drawContours(image, mContours, i, new Scalar(0,0,250), -1);
     		//Mause.control(x, y);
