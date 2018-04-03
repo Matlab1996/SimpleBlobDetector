@@ -423,64 +423,39 @@ public class Webcamprop extends JFrame {
 		String[] resolution = new String[] { "320 x 240", "640 x 480", "800 x 600", "1024 x 768", "1280 x 720",
 				"1280 x 1024", "1920 x 1080" };
 		JComboBox<String> comboBox = new JComboBox<String>(resolution);
+		settings.captureSize.subscribe(captureSize -> {
+			Webcam.lblWebcam.setSize(captureSize.w, captureSize.h);
+			MAIN.setSize(captureSize.w + 16, captureSize.h + 54);
+		});
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				switch ((String) comboBox.getSelectedItem()) {
 				case ("320 x 240"): {
 					settings.captureSize.onNext(new CaptureSize(320, 240));
-					settings.captureSize.subscribe(captureSize -> {
-						Webcam.lblWebcam.setSize(captureSize.w, captureSize.h);
-						MAIN.setSize(captureSize.w + 16, captureSize.h + 54);
-					});
-
 					break;
 				}
 				case ("640 x 480"): {
 					settings.captureSize.onNext(new CaptureSize(640, 480));
-					settings.captureSize.subscribe(captureSize -> {
-						Webcam.lblWebcam.setSize(captureSize.w, captureSize.h);
-						MAIN.setSize(captureSize.w + 16, captureSize.h + 54);
-					});
 					break;
 				}
 				case ("800 x 600"): {
 					settings.captureSize.onNext(new CaptureSize(800, 600));
-					settings.captureSize.subscribe(captureSize -> {
-						Webcam.lblWebcam.setSize(captureSize.w, captureSize.h);
-						MAIN.setSize(captureSize.w + 16, captureSize.h + 54);
-					});
 					break;
 				}
 				case ("1024 x 768"): {
 					settings.captureSize.onNext(new CaptureSize(1024, 768));
-					settings.captureSize.subscribe(captureSize -> {
-						Webcam.lblWebcam.setSize(captureSize.w, captureSize.h);
-						MAIN.setSize(captureSize.w + 16, captureSize.h + 54);
-					});
 					break;
 				}
 				case ("1280 x 720"): {
 					settings.captureSize.onNext(new CaptureSize(1280, 720));
-					settings.captureSize.subscribe(captureSize -> {
-						Webcam.lblWebcam.setSize(captureSize.w, captureSize.h);
-						MAIN.setSize(captureSize.w + 16, captureSize.h + 54);
-					});
 					break;
 				}
 				case ("1280 x 1024"): {
 					settings.captureSize.onNext(new CaptureSize(1280, 1024));
-					settings.captureSize.subscribe(captureSize -> {
-						Webcam.lblWebcam.setSize(captureSize.w, captureSize.h);
-						MAIN.setSize(captureSize.w + 16, captureSize.h + 54);
-					});
 					break;
 				}
 				case ("1920 x 1080"): {
 					settings.captureSize.onNext(new CaptureSize(1920, 1080));
-					settings.captureSize.subscribe(captureSize -> {
-						Webcam.lblWebcam.setSize(captureSize.w, captureSize.h);
-						MAIN.setSize(captureSize.w + 16, captureSize.h + 54);
-					});
 					break;
 				}
 				}
