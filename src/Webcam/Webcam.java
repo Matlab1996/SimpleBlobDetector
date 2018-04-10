@@ -22,7 +22,7 @@ public class Webcam extends JFrame {
 	
 	public static JLabel lblWebcam, lblFps;
 	
-	public static Scalar Upper = new Scalar(255);
+	public static double Upper = 255;
 
 	public static PointerDetector pointerDetector = new PointerDetector();
 	public static ImageProcessor imageProcessor = new ImageProcessor();
@@ -90,14 +90,16 @@ public class Webcam extends JFrame {
 						captureTime = System.currentTimeMillis();
 					}
 
+					Mat imageBackup = webCamMatImage.clone();
 					pointerDetector.process(webCamMatImage, webCamMatImage);
 					pointerDetector.getContours();
-					pointerDetector.drawDetectedPointers(webCamMatImage);
-					pointerDetector.centerOfContour(webCamMatImage);
+					pointerDetector.drawDetectedPointers(imageBackup);
+					pointerDetector.centerOfContour(imageBackup);
 					
-					tempImage = imageProcessor.toBufferedImage(webCamMatImage); 
+					tempImage = imageProcessor.toBufferedImage(imageBackup); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
 					lblWebcam.setIcon(imageIcon);
+					imageBackup.release();
 			 		
 				}else
 				{

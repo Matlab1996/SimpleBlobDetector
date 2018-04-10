@@ -226,7 +226,7 @@ public class Webcamprop extends JFrame {
 		contentPane.add(slider_gain);
 
 		// Добавил JSlider maxArea
-		slider_maxArea = new JSlider(0, 100, 100);
+		slider_maxArea = new JSlider(0, 400, 100);
 
 		slider_maxArea.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -246,7 +246,7 @@ public class Webcamprop extends JFrame {
 		contentPane.add(slider_maxArea);
 
 		// Добавил JSlider minArea
-		slider_minArea = new JSlider(0, 200, 25);
+		slider_minArea = new JSlider(0, 400, 25);
 
 		slider_minArea.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -270,10 +270,10 @@ public class Webcamprop extends JFrame {
 		slider_mUpper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				settings.upper.onNext(new Scalar (slider_mUpper.getValue()));
+				settings.upper.onNext(slider_mUpper.getValue());
 				settings.upper.subscribe(value -> {
-					textField_11.setText("" + (int) value.val[0]);
-					slider_mUpper.setValue((int) value.val[0]);
+					textField_11.setText("" + value);
+					slider_mUpper.setValue((int) value);
 				});
 			
 			}
