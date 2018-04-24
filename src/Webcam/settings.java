@@ -1,7 +1,5 @@
 package Webcam;
 
-import org.opencv.core.Scalar;
-
 import rx.subjects.BehaviorSubject;
 
 public class settings {

@@ -72,7 +72,7 @@ public class PointerDetector {
         Mat Y = channel.get(0);
         //Mat Cr = channel.get(1); 
         //Mat Cb = channel.get(2);
-        Imgproc.threshold(Y, Y, mLowerBound.val[0], mUpperBound.val[0], Imgproc.THRESH_BINARY);
+        Imgproc.threshold(Y, mDilatedMask, mLowerBound.val[0], mUpperBound.val[0], Imgproc.THRESH_BINARY);
         
         //Core.bitwise_not(Y, mMask);
         
@@ -80,7 +80,7 @@ public class PointerDetector {
         //Imgproc.Canny(mMask, canny, 20, 40, 3, true);
        // Imgproc.dilate(canny, mDilatedMask, new Mat());
         contours.clear();
-        Imgproc.findContours(Y, contours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(mDilatedMask, contours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
         Iterator<MatOfPoint> each = contours.iterator();
         // Filter contours by area and resize to fit the original image size

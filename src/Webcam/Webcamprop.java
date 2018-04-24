@@ -1,7 +1,6 @@
 package Webcam;
 
 import java.awt.AWTException;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,8 +17,6 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
-import org.opencv.core.Scalar;
 
 import Webcam.Webcamprop;
 import Webcam.settings.CaptureSize;
@@ -40,29 +37,34 @@ public class Webcamprop extends JFrame {
 	PointerDetector pointerDetector = new PointerDetector();
 	
 	public static void main(String[] args) throws IOException, AWTException {
+		
+		Panel1 app = new Panel1();
+		app.setVisible(true);
+		
 		System.load("C:\\lib\\opencv\\build\\java\\x64\\opencv_java330.dll");
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Webcamprop frame = new Webcamprop();
-					frame.setVisible(true);
-					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		//EventQueue.invokeLater(new Runnable() {
+		//	public void run() {
+		//		try {
+		//			Webcamprop frame = new Webcamprop();
+		//			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//			frame.setVisible(true);
+		//			
+		//		} catch (Exception e) {
+		//			e.printStackTrace();
+		//		}
+		//	}
+		//});
 		Webcam.runMainLoop();
 	}
 
 	public Webcamprop() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(50, 50, 1070, 650);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		MAIN = new Webcam();
 
 		btnCamera = new JButton("CAMERA");
@@ -76,7 +78,7 @@ public class Webcamprop extends JFrame {
 		slider_brightness = new JSlider(-64, 64, 0);
 		slider_brightness.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
-			public void mouseDragged(MouseEvent arg0) {
+			public void mouseDragged(MouseEvent e) {
 				settings.brightness.onNext(slider_brightness.getValue());
 				settings.brightness.subscribe(value -> {
 					textField.setText("" + value);

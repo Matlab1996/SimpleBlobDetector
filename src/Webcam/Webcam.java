@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
@@ -28,8 +27,8 @@ public class Webcam extends JFrame {
 	public static ImageProcessor imageProcessor = new ImageProcessor();
 
 	public Webcam() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 675, 565);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -80,7 +79,7 @@ public class Webcam extends JFrame {
 		{
 			while(true)
 			{
-				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
+				//lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
 				capture.read(webCamMatImage);
 				if(!webCamMatImage.empty())
 				{
@@ -98,7 +97,9 @@ public class Webcam extends JFrame {
 					
 					tempImage = imageProcessor.toBufferedImage(imageBackup); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
-					lblWebcam.setIcon(imageIcon);
+					//lblWebcam.setIcon(imageIcon);
+					Panel1.label1.setIcon(imageIcon);
+					Panel2.label2.setIcon(imageIcon);
 					imageBackup.release();
 			 		
 				}else
