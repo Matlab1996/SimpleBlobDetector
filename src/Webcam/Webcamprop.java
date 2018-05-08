@@ -38,7 +38,7 @@ public class Webcamprop extends JFrame {
 	
 	public static void main(String[] args) throws IOException, AWTException {
 		
-		Panel1 app = new Panel1();
+		Panel app = new Panel();
 		app.setVisible(true);
 		
 		System.load("C:\\lib\\opencv\\build\\java\\x64\\opencv_java330.dll");
@@ -229,7 +229,6 @@ public class Webcamprop extends JFrame {
 
 		// Добавил JSlider maxArea
 		slider_maxArea = new JSlider(0, 400, 100);
-
 		slider_maxArea.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {

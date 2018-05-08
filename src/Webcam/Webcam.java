@@ -69,6 +69,7 @@ public class Webcam extends JFrame {
 		
 		int fourcc = VideoWriter.fourcc('M', 'J', 'P', 'G');
 		int FRAMEcount = 0;
+		@SuppressWarnings("unused")
 		double captureTime =  System.currentTimeMillis();
 
 		VideoCapture capture = new VideoCapture(0);
@@ -98,8 +99,7 @@ public class Webcam extends JFrame {
 					tempImage = imageProcessor.toBufferedImage(imageBackup); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
 					//lblWebcam.setIcon(imageIcon);
-					Panel1.label1.setIcon(imageIcon);
-					Panel2.label2.setIcon(imageIcon);
+					Panel.label.setIcon(imageIcon);
 					imageBackup.release();
 			 		
 				}else

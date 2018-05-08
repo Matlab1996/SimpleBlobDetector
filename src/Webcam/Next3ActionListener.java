@@ -1,0 +1,73 @@
+package Webcam;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.BorderFactory;
+
+public class Next3ActionListener implements ActionListener {
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Panel.panel.removeAll();
+		Panel.panel.setBackground(Color.RED);
+		//Panel.panel.setBounds(100, 100, 500, 415);
+		
+		Panel.label.setBounds(10, 5, 320, 240);
+		Panel.panel.add(Panel.label);
+		
+		Panel.text.setText("Минимальный и максимальный размер");
+		Panel.text.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		Panel.text.setBounds(10, 250, 320, 31);
+		Panel.panel.add(Panel.text);
+		
+		Panel.maxArea.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				settings.maxArea.onNext(Panel.maxArea.getValue());
+				settings.maxArea.subscribe(value -> Panel.maxArea.setValue(value));
+			}
+		});
+		Panel.maxArea.setPaintTicks(true);
+		Panel.maxArea.setPaintLabels(true);
+		Panel.maxArea.setMajorTickSpacing(40);
+		Panel.maxArea.setSnapToTicks(false);
+		Panel.maxArea.setBounds(10, 290, 320, 45);
+		Panel.panel.add(Panel.maxArea);
+
+		Panel.minArea.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				settings.minArea.onNext(Panel.minArea.getValue());
+				settings.minArea.subscribe(value -> Panel.minArea.setValue(value));
+			}
+		});
+		Panel.minArea.setPaintTicks(true);
+		Panel.minArea.setPaintLabels(true);
+		Panel.minArea.setMajorTickSpacing(40);
+		Panel.minArea.setSnapToTicks(false);
+		Panel.minArea.setBounds(10, 340, 320, 45);
+		Panel.panel.add(Panel.minArea);
+		
+		Panel.back4.setBorderPainted(true);
+		Panel.back4.setBorder(BorderFactory.createEtchedBorder(Color.BLUE , Color.BLUE));
+		Panel.back4.setBackground(Color.BLACK);
+		Panel.back4.setBounds(10, 390, 75, 25);
+		Panel.back4.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		Panel.back4.addActionListener(new Next2ActionListener());
+		Panel.panel.add(Panel.back4);
+		
+		Panel.next4.setBackground(Color.BLUE);
+		Panel.next4.setBorderPainted(true);
+		Panel.next4.setBorder(BorderFactory.createEtchedBorder(Color.BLUE , Color.BLUE));
+		Panel.next4.setBounds(255, 390, 75, 25);
+		Panel.next4.setFont(new Font("Times New Roman", Font.BOLD, 14));
+		//Panel.next4.addActionListener(new Next3ActionListener());
+		Panel.panel.add(Panel.next4);
+	}
+
+}
