@@ -7,14 +7,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-import javax.swing.BorderFactory;
-
 public class Next3ActionListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Panel.panel.removeAll();
-		Panel.panel.setBackground(Color.RED);
+		Panel.panel.setBackground(new Color(255, 254, 255));
 		//Panel.panel.setBounds(100, 100, 500, 415);
 		
 		Panel.label.setBounds(10, 5, 320, 240);
@@ -36,6 +34,7 @@ public class Next3ActionListener implements ActionListener {
 		Panel.maxArea.setPaintLabels(true);
 		Panel.maxArea.setMajorTickSpacing(40);
 		Panel.maxArea.setSnapToTicks(false);
+		Panel.maxArea.setBackground(Color.white);
 		Panel.maxArea.setBounds(10, 290, 320, 45);
 		Panel.panel.add(Panel.maxArea);
 
@@ -50,20 +49,19 @@ public class Next3ActionListener implements ActionListener {
 		Panel.minArea.setPaintLabels(true);
 		Panel.minArea.setMajorTickSpacing(40);
 		Panel.minArea.setSnapToTicks(false);
+		Panel.minArea.setBackground(Color.white);
 		Panel.minArea.setBounds(10, 340, 320, 45);
 		Panel.panel.add(Panel.minArea);
 		
 		Panel.back4.setBorderPainted(true);
-		Panel.back4.setBorder(BorderFactory.createEtchedBorder(Color.BLUE , Color.BLUE));
-		Panel.back4.setBackground(Color.BLACK);
+		Panel.back4.setBackground(Color.white);
 		Panel.back4.setBounds(10, 390, 75, 25);
 		Panel.back4.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		Panel.back4.addActionListener(new Next2ActionListener());
 		Panel.panel.add(Panel.back4);
 		
-		Panel.next4.setBackground(Color.BLUE);
+		Panel.next4.setBackground(Color.white);
 		Panel.next4.setBorderPainted(true);
-		Panel.next4.setBorder(BorderFactory.createEtchedBorder(Color.BLUE , Color.BLUE));
 		Panel.next4.setBounds(255, 390, 75, 25);
 		Panel.next4.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		//Panel.next4.addActionListener(new Next3ActionListener());

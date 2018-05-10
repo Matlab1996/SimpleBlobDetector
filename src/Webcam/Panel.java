@@ -34,7 +34,7 @@ public class Panel extends JFrame{
 		setBounds(100, 100, 355, 460);
 		setLocationRelativeTo(null);
 		
-		panel.setBackground(new Color(255, 255, 255));
+		panel.setBackground(Color.white);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panel);
 		panel.setLayout(null);
@@ -62,20 +62,18 @@ public class Panel extends JFrame{
 		exposure.setPaintLabels(true);
 		exposure.setMajorTickSpacing(1);
 		exposure.setSnapToTicks(false);
-		exposure.setBackground(new Color(255, 255, 255));
+		exposure.setBackground(Color.white);
 		exposure.setBounds(10, 290, 320, 45);
 		panel.add(exposure);
 		
 		back1.setBorderPainted(true);
-		back1.setBorder(BorderFactory.createEtchedBorder(Color.BLUE , Color.BLUE));
-		back1.setBackground(Color.WHITE);
+		back1.setBackground(Color.white);
 		back1.setBounds(10, 340, 75, 25);
 		back1.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		panel.add(back1);
 		
-		next1.setBackground(Color.WHITE);
+		next1.setBackground(Color.white);
 		next1.setBorderPainted(true);
-		next1.setBorder(BorderFactory.createEtchedBorder(Color.BLUE , Color.BLUE));
 		next1.setBounds(255, 340, 75, 25);
 		next1.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		next1.addActionListener(new Next1ActionListener());

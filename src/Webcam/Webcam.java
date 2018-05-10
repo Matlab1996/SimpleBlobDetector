@@ -5,9 +5,6 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
@@ -16,34 +13,11 @@ import org.opencv.videoio.Videoio;
 
 @SuppressWarnings("serial")
 public class Webcam extends JFrame {
-
-	public JPanel contentPane;
-	
-	public static JLabel lblWebcam, lblFps;
 	
 	public static double Upper = 255;
 
 	public static PointerDetector pointerDetector = new PointerDetector();
 	public static ImageProcessor imageProcessor = new ImageProcessor();
-
-	public Webcam() {
-		setBounds(100, 100, 675, 565);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-
-		lblFps = new JLabel("FPS");
-		lblFps.setBounds(0, 0, 207, 14);
-		contentPane.add(lblFps);
-
-		lblWebcam = new JLabel("New label");
-		settings.captureSize.subscribe(captureSize -> lblWebcam.setBounds(0, 14, captureSize.h, captureSize.w));
-		contentPane.add(lblWebcam);
-		
-	}
 
 	private static void subscribeForSettings(VideoCapture capture){
 		settings.captureSize.subscribe(captureSize -> { 
@@ -80,7 +54,6 @@ public class Webcam extends JFrame {
 		{
 			while(true)
 			{
-				//lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
 				capture.read(webCamMatImage);
 				if(!webCamMatImage.empty())
 				{
@@ -98,7 +71,6 @@ public class Webcam extends JFrame {
 					
 					tempImage = imageProcessor.toBufferedImage(imageBackup); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
-					//lblWebcam.setIcon(imageIcon);
 					Panel.label.setIcon(imageIcon);
 					imageBackup.release();
 			 		
