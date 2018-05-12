@@ -34,6 +34,8 @@ public class Panel extends JFrame{
 		setBounds(100, 100, 355, 460);
 		setLocationRelativeTo(null);
 		
+		settings.height.subscribe(h -> setSize(355, h));
+		
 		panel.setBackground(Color.white);
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(panel);

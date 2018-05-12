@@ -13,7 +13,7 @@ public class Next3ActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Panel.panel.removeAll();
 		Panel.panel.setBackground(new Color(255, 254, 255));
-		//Panel.panel.setBounds(100, 100, 500, 415);
+		settings.height.onNext(460);
 		
 		Panel.label.setBounds(10, 5, 320, 240);
 		Panel.panel.add(Panel.label);

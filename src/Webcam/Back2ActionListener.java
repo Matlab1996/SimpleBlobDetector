@@ -13,6 +13,7 @@ public class Back2ActionListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Panel.panel.removeAll();
 		Panel.panel.setBackground(Color.white);
+		settings.height.onNext(415);
 		
 		Panel.label.setBounds(10, 5, 320, 240);
 		Panel.panel.add(Panel.label);
