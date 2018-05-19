@@ -2,6 +2,7 @@ package Webcam;
 
 import java.awt.AWTException;
 import java.awt.EventQueue;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -13,8 +14,8 @@ public class Webcamprop extends JFrame {
 	PointerDetector pointerDetector = new PointerDetector();
 	
 	public static void main(String[] args) throws IOException, AWTException {
-		
-		System.load("C:\\lib\\opencv\\build\\java\\x64\\opencv_java330.dll");
+		File name = new File ("lib//opencv_java330.dll");
+		System.load(name.getAbsolutePath());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

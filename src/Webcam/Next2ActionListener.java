@@ -24,11 +24,11 @@ public class Next2ActionListener implements ActionListener {
 		Panel.text.setBounds(10, 250, 320, 31);
 		Panel.panel.add(Panel.text);
 		
+		settings.upper.subscribe(value -> Panel.upper.setValue((int) value));
 		Panel.upper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				settings.upper.onNext(Panel.upper.getValue());
-				settings.upper.subscribe(value -> Panel.upper.setValue((int) value));
 			}
 		});
 		Panel.upper.setPaintTicks(true);

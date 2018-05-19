@@ -23,13 +23,11 @@ public class Back2ActionListener implements ActionListener {
 		Panel.text.setBounds(10, 250, 320, 31);
 		Panel.panel.add(Panel.text);
 		
+		settings.exposure.subscribe(value -> Panel.exposure.setValue(value));
 		Panel.exposure.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				settings.exposure.onNext(Panel.exposure.getValue());
-				settings.exposure.subscribe(value -> {
-					Panel.exposure.setValue(value);
-				});
 			}
 		});
 		Panel.exposure.setPaintTicks(true);

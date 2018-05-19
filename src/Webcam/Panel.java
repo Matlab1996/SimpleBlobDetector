@@ -51,13 +51,11 @@ public class Panel extends JFrame{
 		text.setBounds(10, 250, 320, 31);
 		panel.add(text);
 
+		settings.exposure.subscribe(value -> exposure.setValue(value));
 		exposure.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				settings.exposure.onNext(exposure.getValue());
-				settings.exposure.subscribe(value -> {
-					exposure.setValue(value);
-				});
 			}
 		});
 		exposure.setPaintTicks(true);

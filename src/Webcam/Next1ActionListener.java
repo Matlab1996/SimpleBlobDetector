@@ -13,11 +13,6 @@ public class Next1ActionListener implements ActionListener{
 		settings.height.onNext(165);
 		Panel.panel.setBackground(new Color(255, 254, 255));
 		
-		//settings.captureSize.onNext(new CaptureSize(375, 460));
-		
-		//Panel.label.setBounds(10, 5, 320, 240);
-		//Panel.panel.add(Panel.label);
-		
 		Panel.text.setText("Выберите расстояние до поверхности");
 		Panel.text.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		Panel.text.setBounds(10, 5, 320, 31);

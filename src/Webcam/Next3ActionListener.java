@@ -23,11 +23,11 @@ public class Next3ActionListener implements ActionListener {
 		Panel.text.setBounds(10, 250, 320, 31);
 		Panel.panel.add(Panel.text);
 		
+		settings.maxArea.subscribe(value -> Panel.maxArea.setValue(value));
 		Panel.maxArea.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				settings.maxArea.onNext(Panel.maxArea.getValue());
-				settings.maxArea.subscribe(value -> Panel.maxArea.setValue(value));
 			}
 		});
 		Panel.maxArea.setPaintTicks(true);
@@ -38,11 +38,11 @@ public class Next3ActionListener implements ActionListener {
 		Panel.maxArea.setBounds(10, 290, 320, 45);
 		Panel.panel.add(Panel.maxArea);
 
+		settings.minArea.subscribe(value -> Panel.minArea.setValue(value));
 		Panel.minArea.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				settings.minArea.onNext(Panel.minArea.getValue());
-				settings.minArea.subscribe(value -> Panel.minArea.setValue(value));
 			}
 		});
 		Panel.minArea.setPaintTicks(true);
