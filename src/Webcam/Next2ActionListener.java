@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import Webcam.Distance.PointerDetectionSettingsProvider;
+import Webcam.Distance.PointerDetectorSetting;
+
 public class Next2ActionListener implements ActionListener {
 
 	@Override
@@ -14,20 +17,26 @@ public class Next2ActionListener implements ActionListener {
 		Panel.panel.removeAll();
 		Panel.panel.setBackground(Color.white);
 		settings.height.onNext(415);
-		
+
 		Panel.label.setBounds(10, 5, 320, 240);
 		Panel.panel.add(Panel.label);
-		
-		//Panel1.text.removeAll();
+
+		// Panel1.text.removeAll();
 		Panel.text.setText("Настройка чувствительности");
 		Panel.text.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		Panel.text.setBounds(10, 250, 320, 31);
 		Panel.panel.add(Panel.text);
-		
+
 		settings.upper.subscribe(value -> Panel.upper.setValue((int) value));
 		Panel.upper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
+				PointerDetectorSetting tempSettings = PointerDetectionSettingsProvider
+						.GetPointerDetectorSetting(Panel.upper.getValue());
+				settings.upper.onNext((int) tempSettings.Sensivity.Max);
+				settings.exposure.onNext((int) tempSettings.Exposure);
+				settings.minArea.onNext((int) tempSettings.Diameter.Min);
+				settings.maxArea.onNext((int) tempSettings.Diameter.Max);
 				settings.upper.onNext(Panel.upper.getValue());
 			}
 		});
@@ -38,15 +47,14 @@ public class Next2ActionListener implements ActionListener {
 		Panel.upper.setBackground(Color.white);
 		Panel.upper.setBounds(10, 290, 320, 45);
 		Panel.panel.add(Panel.upper);
-		
-		
+
 		Panel.back3.setBorderPainted(true);
 		Panel.back3.setBackground(Color.white);
 		Panel.back3.setBounds(10, 340, 75, 25);
 		Panel.back3.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		Panel.back3.addActionListener(new Next1ActionListener());
 		Panel.panel.add(Panel.back3);
-		
+
 		Panel.next3.setBackground(Color.white);
 		Panel.next3.setBorderPainted(true);
 		Panel.next3.setBounds(255, 340, 75, 25);
