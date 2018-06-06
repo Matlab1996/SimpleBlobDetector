@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+
+import org.apache.commons.lang3.SystemUtils;
+
 import Webcam.Webcamprop;
 
 @SuppressWarnings("serial")
@@ -14,8 +17,13 @@ public class Webcamprop extends JFrame {
 	PointerDetector pointerDetector = new PointerDetector();
 	
 	public static void main(String[] args) throws IOException, AWTException {
-		File name = new File ("lib//opencv_java330.dll");
-		System.load(name.getAbsolutePath());
+		String libName = "";
+		if (SystemUtils.IS_OS_WINDOWS) {
+		    libName = "opencv_java330.dll";
+		} else if (SystemUtils.IS_OS_LINUX) {
+		    libName = "libopencv_java320.so";
+		}
+		System.load(new File("lib/".concat(libName)).getAbsolutePath());
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
