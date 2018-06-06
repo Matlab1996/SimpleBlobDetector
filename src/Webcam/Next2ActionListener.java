@@ -7,9 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
-import Webcam.Distance.PointerDetectionSettingsProvider;
-import Webcam.Distance.PointerDetectorSetting;
-
 public class Next2ActionListener implements ActionListener {
 
 	@Override
@@ -31,12 +28,6 @@ public class Next2ActionListener implements ActionListener {
 		Panel.upper.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				PointerDetectorSetting tempSettings = PointerDetectionSettingsProvider
-						.GetPointerDetectorSetting(Panel.upper.getValue());
-				settings.upper.onNext((int) tempSettings.Sensivity.Max);
-				settings.exposure.onNext((int) tempSettings.Exposure);
-				settings.minArea.onNext((int) tempSettings.Diameter.Min);
-				settings.maxArea.onNext((int) tempSettings.Diameter.Max);
 				settings.upper.onNext(Panel.upper.getValue());
 			}
 		});

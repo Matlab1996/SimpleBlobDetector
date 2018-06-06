@@ -4,6 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
+import Webcam.Distance.PointerDetectionSettingsProvider;
+import Webcam.Distance.PointerDetectorSetting;
 
 public class Next1ActionListener implements ActionListener{
 
@@ -18,13 +23,17 @@ public class Next1ActionListener implements ActionListener{
 		Panel.text.setBounds(10, 5, 320, 31);
 		Panel.panel.add(Panel.text);
 		
-		//slider.addMouseMotionListener(new MouseMotionAdapter() {
-		//	@Override
-		//	public void mouseDragged(MouseEvent e) {
-		//		settings.upper.onNext(slider.getValue());
-		//		settings.upper.subscribe(value -> slider.setValue((int) value));
-		//	}
-		//});
+		Panel.distance.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				PointerDetectorSetting tempSettings = PointerDetectionSettingsProvider
+						.GetPointerDetectorSetting(Panel.distance.getValue());
+				settings.upper.onNext((int) tempSettings.Sensivity.Max);
+				settings.exposure.onNext((int) tempSettings.Exposure);
+				settings.minArea.onNext((int) tempSettings.Diameter.Min);
+				settings.maxArea.onNext((int) tempSettings.Diameter.Max);
+			}
+		});
 		Panel.distance.setPaintTicks(true);
 		Panel.distance.setPaintLabels(true);
 		Panel.distance.setMajorTickSpacing(1);
