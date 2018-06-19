@@ -5,50 +5,21 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import org.opencv.core.Mat;
-import org.opencv.core.Scalar;
 import org.opencv.videoio.VideoCapture;
 import org.opencv.videoio.VideoWriter;
 import org.opencv.videoio.Videoio;
 
 @SuppressWarnings("serial")
 public class Webcam extends JFrame {
-
-	public JPanel contentPane;
 	
-	public static JLabel lblWebcam, lblFps;
-	
-	public static Scalar Upper = new Scalar(255);
+	public static double Upper = 255;
 
 	public static PointerDetector pointerDetector = new PointerDetector();
 	public static ImageProcessor imageProcessor = new ImageProcessor();
 
-	public Webcam() {
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 675, 565);
-
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-
-		lblFps = new JLabel("FPS");
-		lblFps.setBounds(0, 0, 207, 14);
-		contentPane.add(lblFps);
-
-		lblWebcam = new JLabel("New label");
-		settings.captureSize.subscribe(captureSize -> lblWebcam.setBounds(0, 14, captureSize.h, captureSize.w));
-		contentPane.add(lblWebcam);
-		
-	}
-
 	private static void subscribeForSettings(VideoCapture capture){
-		// settings.width.subscribe(widthValue -> capture.set(Videoio.CAP_PROP_FRAME_WIDTH, widthValue));
-		// settings.height.subscribe(heightValue -> capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, heightValue));
 		settings.captureSize.subscribe(captureSize -> { 
 			capture.set(Videoio.CAP_PROP_FRAME_WIDTH, captureSize.w);
 			capture.set(Videoio.CAP_PROP_FRAME_HEIGHT, captureSize.h);
@@ -61,12 +32,9 @@ public class Webcam extends JFrame {
 		settings.exposure.subscribe(exposureValue -> capture.set(Videoio.CAP_PROP_EXPOSURE, exposureValue));
 		settings.gamma.subscribe(gammaValue -> capture.set(Videoio.CAP_PROP_GAMMA, gammaValue));
 		settings.gain.subscribe(gainValue -> capture.set(Videoio.CAP_PROP_GAIN, gainValue));
-		settings.upper.subscribe(upperValue -> {
-													pointerDetector.setHsvColor(Upper);
-													capture.set((int) Upper.val[0], upperValue);
-													});
-		settings.maxArea.subscribe(Area -> capture.set((int) pointerDetector.mMaxContourArea, Area));
-		settings.minArea.subscribe(Area -> capture.set((int) pointerDetector.mMinContourArea, Area));
+		settings.upper.subscribe(upperValue -> pointerDetector.setHsvColor(upperValue));
+		settings.minArea.subscribe(minArea -> pointerDetector.setMinContourArea(minArea));
+        settings.maxArea.subscribe(maxArea -> pointerDetector.setMaxContourArea(maxArea));
 	}
 
 	public static void runMainLoop() throws AWTException{
@@ -75,6 +43,7 @@ public class Webcam extends JFrame {
 		
 		int fourcc = VideoWriter.fourcc('M', 'J', 'P', 'G');
 		int FRAMEcount = 0;
+		@SuppressWarnings("unused")
 		double captureTime =  System.currentTimeMillis();
 
 		VideoCapture capture = new VideoCapture(0);
@@ -85,9 +54,6 @@ public class Webcam extends JFrame {
 		{
 			while(true)
 			{
-				
-				lblFps.setText("FPS: " + ((FRAMEcount*1000)/(System.currentTimeMillis() - captureTime)));
-	
 				capture.read(webCamMatImage);
 				if(!webCamMatImage.empty())
 				{
@@ -97,17 +63,16 @@ public class Webcam extends JFrame {
 						captureTime = System.currentTimeMillis();
 					}
 
-					Mat output = new Mat();
-					pointerDetector.process(webCamMatImage, output);
+					Mat imageBackup = webCamMatImage.clone();
+					pointerDetector.process(webCamMatImage, webCamMatImage);
 					pointerDetector.getContours();
+					pointerDetector.drawDetectedPointers(imageBackup);
+					pointerDetector.centerOfContour(imageBackup);
 					
-					pointerDetector.drawDetectedPointers(webCamMatImage);
-					
-					pointerDetector.centerOfContour(webCamMatImage);
-					
-					tempImage = imageProcessor.toBufferedImage(webCamMatImage); 
+					tempImage = imageProcessor.toBufferedImage(imageBackup); 
 					ImageIcon imageIcon = new ImageIcon(tempImage, "Captured Video");
-					lblWebcam.setIcon(imageIcon);
+					Panel.label.setIcon(imageIcon);
+					imageBackup.release();
 			 		
 				}else
 				{
