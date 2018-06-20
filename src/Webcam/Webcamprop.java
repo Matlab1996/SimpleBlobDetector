@@ -22,6 +22,8 @@ public class Webcamprop extends JFrame {
 		    libName = "opencv_java330.dll";
 		} else if (SystemUtils.IS_OS_LINUX) {
 		    libName = "libopencv_java320.so";
+		}else if (SystemUtils.IS_OS_MAC_OSX) {
+			libName = "libopencv_java341.dylib";
 		}
 		System.load(new File("lib/".concat(libName)).getAbsolutePath());
 		EventQueue.invokeLater(new Runnable() {
