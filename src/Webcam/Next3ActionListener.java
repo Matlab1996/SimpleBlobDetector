@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 
+import newcam.CanvasPanel;
+
 public class Next3ActionListener implements ActionListener {
 
 	@Override
@@ -64,14 +66,14 @@ public class Next3ActionListener implements ActionListener {
 		Panel.next4.setBorderPainted(true);
 		Panel.next4.setBounds(255, 390, 75, 25);
 		Panel.next4.setFont(new Font("Times New Roman", Font.BOLD, 14));
-		Panel.next4.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							CanvasPanel canvas = new CanvasPanel();
-							canvas.setVisible(true);
-						}
-					});
-		Panel.panel.add(Panel.next4);
+		///Panel.next4.addActionListener(new ActionListener() {
+		//				@Override
+		//				public void actionPerformed(ActionEvent e) {
+		//					CanvasPanel canvas = new CanvasPanel();
+		//					canvas.setVisible(true);
+		//				}
+		//			});
+		//Panel.panel.add(Panel.next4);
 	}
 
 }

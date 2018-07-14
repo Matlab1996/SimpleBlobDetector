@@ -1,4 +1,4 @@
-package Webcam;
+package newcam;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -12,6 +12,7 @@ public class CanvasPanel extends JFrame{
         setSize(640, 720);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setUndecorated(true);
+        setVisible(true);
     }
     @Override
     public void paint(Graphics g) {
@@ -29,8 +30,8 @@ public class CanvasPanel extends JFrame{
     	}
     } 
     
-    //public static void main(String args[]) {
-    //	new CanvasPanel();
-    //}
+    public static void main(String args[]) {
+    	new CanvasPanel();
+    }
     
 }
